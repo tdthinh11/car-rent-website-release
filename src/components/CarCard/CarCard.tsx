@@ -104,10 +104,10 @@ const ChildVertical = ({ gas, capacity, imgSm, imgLg }: CarChild) => {
 const ChildHorizontal = ({ gas, capacity, imgSm, imgLg }: CarChild) => {
   return (
     <div className="mt-3 flex items-end justify-between">
-      <div className="relative ml-7">
+      <div className="relative ml-3">
         <img src={imgSm} alt="WC" loading="lazy" className="s375:hidden" />
         <img src={imgLg} alt="WC" loading="lazy" className="s375:block hidden" />
-        <div className="bg-shadow-1 absolute top-7 h-11 w-full"></div>
+        <div className="bg-shadow-1 absolute top-8 h-11 w-full"></div>
       </div>
       <div className="flex flex-col justify-between gap-4">
         <div className="flex items-center">

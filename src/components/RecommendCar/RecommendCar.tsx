@@ -40,6 +40,7 @@ const RecommendCar = ({ listRecommendCars, onClick, isLoading }: RecommendCarPro
                     imgSm={car.imgSm}
                     imgLg={car.imgLg}
                     onclick={() => onClick(car)}
+                    cardType="vertical"
                   />
                 </div>
               );
@@ -57,17 +58,34 @@ const RecommendCar = ({ listRecommendCars, onClick, isLoading }: RecommendCarPro
                   key={`${car.id} + ${car.type}`}
                   className="min-w-[282px] sm:min-w-[304px] sm:max-w-[304px] lg:min-w-[304px]"
                 >
-                  <CarCard
-                    carName={car.name}
-                    carType={car.type}
-                    capacity={car.capacity}
-                    gas={car.gas}
-                    price={car.price}
-                    isLiked={car.isLiked}
-                    imgSm={car.imgSm}
-                    imgLg={car.imgLg}
-                    onclick={() => onClick(car)}
-                  />
+                  <div className="s375:hidden">
+                    <CarCard
+                      carName={car.name}
+                      carType={car.type}
+                      capacity={car.capacity}
+                      gas={car.gas}
+                      price={car.price}
+                      isLiked={car.isLiked}
+                      imgSm={car.imgSm}
+                      imgLg={car.imgLg}
+                      onclick={() => onClick(car)}
+                      cardType="horizontal"
+                    />
+                  </div>
+                  <div className="s375:block hidden">
+                    <CarCard
+                      carName={car.name}
+                      carType={car.type}
+                      capacity={car.capacity}
+                      gas={car.gas}
+                      price={car.price}
+                      isLiked={car.isLiked}
+                      imgSm={car.imgSm}
+                      imgLg={car.imgLg}
+                      onclick={() => onClick(car)}
+                      cardType="vertical"
+                    />
+                  </div>
                 </div>
               );
             })
@@ -92,7 +110,7 @@ const RecommendCar = ({ listRecommendCars, onClick, isLoading }: RecommendCarPro
           {!isViewAll ? 'Show more car' : 'Show less'}
         </Button>
         <span className="text-grey absolute right-0 top-1/2 -translate-y-1/2 text-sm font-bold leading-[18px]">
-          120 cars
+          {listRecommendCars.length} cars
         </span>
       </div>
     </div>

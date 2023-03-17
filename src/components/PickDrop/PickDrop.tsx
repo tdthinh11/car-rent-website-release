@@ -75,7 +75,7 @@ const PickDrop = ({ tittle, listLocation, handleChangeValue }: PickDropProps) =>
         <p className="text-black-2 font-semibold leading-[150%] tracking-tight">{tittle}</p>
       </div>
       <div className="s375:flex s375:justify-between relative">
-        <div className="s375:grow s375:border-r border-light px-4">
+        <div className="s375:grow s375:border-r s375:basis-0 border-light px-4">
           <h3>Location</h3>
           <Listbox value={value} onChange={(value: unknown) => handleChangeLocation(value)}>
             <Listbox.Button
@@ -125,7 +125,7 @@ const PickDrop = ({ tittle, listLocation, handleChangeValue }: PickDropProps) =>
             </Listbox.Button>
           </Listbox>
         </div>
-        <div className="s375:grow s375:border-r border-light px-4">
+        <div className="s375:grow s375:border-r s375:basis-0 border-light px-4">
           <h3>Date</h3>
           <div className="relative pt-2">
             <div className="flex justify-between">
@@ -145,7 +145,7 @@ const PickDrop = ({ tittle, listLocation, handleChangeValue }: PickDropProps) =>
             />
           </div>
         </div>
-        <div className="s375:grow px-4">
+        <div className="s375:grow s375:basis-0 px-4">
           <h3>Time</h3>
           <div className="relative pt-2">
             <div className="flex justify-between">
