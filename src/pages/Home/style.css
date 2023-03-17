@@ -1,0 +1,8 @@
+.car-card::-webkit-scrollbar,
+.car-card::-webkit-scrollbar-track,
+.car-card::-webkit-scrollbar-thumb,
+.car-card::-webkit-scrollbar-thumb:hover {
+  display: none;
+  width: 0;
+  background: transparent;
+}
