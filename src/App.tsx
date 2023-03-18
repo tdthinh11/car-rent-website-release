@@ -8,6 +8,8 @@ import { WrapperLayout } from '@/layout/WrapperLayout/WrapperLayout';
 import Home from '@/pages/Home/Home';
 import store from '@/store/store';
 
+import { Detail } from './pages/Detail/Detail';
+
 function App() {
   return (
     <HelmetProvider>
@@ -17,6 +19,7 @@ function App() {
             <Routes>
               <Route path="/" element={<WrapperLayout />}>
                 <Route path="/" element={<Home />} />
+                <Route path="detail/:carId" element={<Detail />} />
               </Route>
             </Routes>
           </Provider>

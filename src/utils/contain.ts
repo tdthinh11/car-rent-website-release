@@ -6,5 +6,5 @@ export const BUS_TYPE = {
 
 export const GET_POPULAR_CARS = 'list-popular-cars';
 export const GET_RECOMMEND_CARS = 'list-recommend-cars';
-export const GET_LIST_PICK_UP = 'list-pick-up';
-export const GET_LIST_DROP_OFF = 'list-drop-off';
+export const GET_LOCATION = 'list-location';
+export const SEARCH = 'search';

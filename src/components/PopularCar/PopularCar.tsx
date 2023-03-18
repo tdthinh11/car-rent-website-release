@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
+import { carType } from '@/assets/data/cars';
 import { CarCard } from '@/components/CarCard/CarCard';
-import { carType } from '@/service/carServices';
 
 type PopularProps = {
   listPopularCars: carType[];
@@ -39,7 +39,7 @@ const PopularCar = ({ listPopularCars, onClick, isLoading }: PopularProps) => {
             listPopularCars.map((car) => {
               return (
                 <div
-                  key={`${car.id + car.typeBusiness}`}
+                  key={`${car.id}`}
                   className="min-w-[282px] snap-start scroll-ml-6 sm:min-w-[304px] sm:max-w-[304px] lg:min-w-[304px]"
                 >
                   <CarCard
@@ -52,6 +52,7 @@ const PopularCar = ({ listPopularCars, onClick, isLoading }: PopularProps) => {
                     imgSm={car.imgSm}
                     imgLg={car.imgLg}
                     onclick={() => onClick(car)}
+                    carId={car.id}
                   />
                 </div>
               );
@@ -66,7 +67,7 @@ const PopularCar = ({ listPopularCars, onClick, isLoading }: PopularProps) => {
             listPopularCars.slice(0, 2).map((car) => {
               return (
                 <div
-                  key={`${car.id + car.typeBusiness}`}
+                  key={`${car.id}`}
                   className="min-w-[240px] max-w-[240px] snap-start scroll-ml-6 sm:min-w-[282px] sm:max-w-[304px] lg:min-w-[304px]"
                 >
                   <CarCard
@@ -79,6 +80,7 @@ const PopularCar = ({ listPopularCars, onClick, isLoading }: PopularProps) => {
                     imgSm={car.imgSm}
                     imgLg={car.imgLg}
                     onclick={() => onClick(car)}
+                    carId={car.id}
                   />
                 </div>
               );

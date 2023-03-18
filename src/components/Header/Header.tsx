@@ -1,4 +1,5 @@
-import { useDispatch } from 'react-redux';
+import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Popover } from '@headlessui/react';
 
@@ -7,24 +8,33 @@ import { Notification } from '@/assets/icons/Notification';
 import { Setting } from '@/assets/icons/Setting';
 import User from '@/assets/images/user.png';
 import { changeSearchKey } from '@/store/carSlice';
+import { useAppDispatch } from '@/store/hook';
 
 import { Search } from '../Search/Search';
 import './Header.css';
 
 const Header = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const debounceRef = useRef<NodeJS.Timeout>();
 
+  // Debounce search
   const handleChange: React.ChangeEventHandler<HTMLInputElement> | undefined = (event) => {
-    dispatch(changeSearchKey(event.target.value));
+    debounceRef.current ?? clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      dispatch(changeSearchKey(event.target.value));
+    }, 300);
   };
   return (
     <div className="bg-white">
       <div className="wrapper py-8 px-6 md:py-10 md:px-16">
         <div className="mb-8 flex items-center justify-between md:mb-0">
           <div className="flex items-center">
-            <h1 className="text-primary mr-7 text-2xl font-bold leading-[120%] hover:cursor-pointer md:text-3xl md:leading-[150%] md:tracking-tight lg:mr-16">
+            <Link
+              to="/"
+              className="text-primary mr-7 text-2xl font-bold leading-[120%] hover:cursor-pointer md:text-3xl md:leading-[150%] md:tracking-tight lg:mr-16"
+            >
               MORENT
-            </h1>
+            </Link>
             <div className="hidden md:block">
               <Search placeHolder="Search something here" onChange={handleChange} />
             </div>
