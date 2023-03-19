@@ -26,7 +26,7 @@ const Header = () => {
   };
   return (
     <div className="bg-white">
-      <div className="wrapper py-8 px-6 md:py-10 md:px-16">
+      <div className="py-8 px-6 md:py-10 md:px-16">
         <div className="mb-8 flex items-center justify-between md:mb-0">
           <div className="flex items-center">
             <Link
