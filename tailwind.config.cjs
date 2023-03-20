@@ -9,7 +9,8 @@ module.exports = {
         'black-2': '#1A202C',
         grey: '#90A3BF',
         'grey-2': '#131313',
-        like: '#ED3F3F'
+        like: '#ED3F3F',
+        yellow: '#FBAD39',
       },
       backgroundColor: {
         bg: "#F6F7F9",
@@ -32,7 +33,8 @@ module.exports = {
       lineHeight: {
         '100': '100%',
         '120': '120%',
-        '150': '150%'
+        '150': '150%',
+        '200': '200%'
       },
     },
   },

@@ -12,6 +12,7 @@ export type carReducerType = {
   listAll: [];
   locations: [];
   isLoading: boolean;
+  carDetail: carType | null;
 };
 
 const initialState: carReducerType = {
@@ -21,6 +22,7 @@ const initialState: carReducerType = {
   listAll: [],
   locations: [],
   isLoading: false,
+  carDetail: null,
 };
 
 const carSlice = createSlice({
@@ -41,10 +43,14 @@ const carSlice = createSlice({
     changeIsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    updateCarDetail: (state, action) => {
+      state.carDetail = action.payload;
+    },
   },
 });
 
-export const { changeSearchKey, updateListCar, getLocation, changeIsLoading } = carSlice.actions;
+export const { changeSearchKey, updateListCar, getLocation, changeIsLoading, updateCarDetail } =
+  carSlice.actions;
 export default carSlice.reducer;
 
 // ******************************** ACTION THUNK **************************** //
@@ -97,11 +103,19 @@ export const changeIsLikeStatus = (car: carType): AppThunk => {
       dispatch(
         updateListCar({
           listAll: listAllUpdate,
-          listPopularCar,
-          listRecommendCar,
+          listPopularCar: listPopularCar,
+          listRecommendCar: listRecommendCar,
         }),
       );
     }
+  };
+};
+
+export const updateCarDetailThunk = (carId: string): AppThunk => {
+  return async (dispatch, getState) => {
+    const { carReducer } = getState();
+    const carUpdate = carReducer.listAll.find((carItem: carType) => carItem.id === carId);
+    dispatch(updateCarDetail(carUpdate));
   };
 };
 
@@ -109,4 +123,5 @@ export const carActionThunk = {
   getListCarsApi,
   getListLocation,
   changeIsLikeStatus,
+  updateCarDetailThunk,
 };

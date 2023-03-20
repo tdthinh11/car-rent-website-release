@@ -77,15 +77,18 @@ const PickDrop = ({ tittle, listLocation, handleChangeValue }: PickDropProps) =>
       <div className="s375:flex s375:justify-between relative">
         <div className="s375:grow s375:border-r s375:basis-0 border-light px-4">
           <h3>Location</h3>
-          <Listbox value={value} onChange={(value: unknown) => handleChangeLocation(value)}>
+          <Listbox
+            value={value.location}
+            onChange={(value: ILocation) => handleChangeLocation(value)}
+          >
             <Listbox.Button
               className={`s375:static relative flex w-full cursor-default items-center justify-between rounded-lg bg-white pt-2 text-left hover:cursor-pointer focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-[75px] focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm`}
             >
               <span className="text-grey my-1 block truncate text-xs leading-4 tracking-[0.01em]">
-                {value?.location.value}
+                {value.location?.value}
               </span>
               <span className="text-grey pointer-events-none my-1 flex items-center">
-                <ArrowDown />
+                <ArrowDown className="fill-current" />
               </span>
               <Transition
                 as={Fragment}
@@ -94,9 +97,9 @@ const PickDrop = ({ tittle, listLocation, handleChangeValue }: PickDropProps) =>
                 leaveTo="opacity-0"
               >
                 <Listbox.Options className="s375:top-16 absolute left-0 top-10 z-10 w-full bg-slate-200">
-                  {listLocation?.map((item: unknown, index) => (
+                  {listLocation?.map((item: ILocation) => (
                     <Listbox.Option
-                      key={item.id + index}
+                      key={item.id}
                       className={({ active }) =>
                         `relative select-none py-1 px-4 truncate text-xs w-full hover:cursor-pointer leading-4 tracking-[0.01em] ${
                           active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
@@ -133,7 +136,7 @@ const PickDrop = ({ tittle, listLocation, handleChangeValue }: PickDropProps) =>
                 {value.date}
               </span>
               <span className="text-grey pointer-events-none my-1 flex items-center">
-                <ArrowDown />
+                <ArrowDown className="fill-current" />
               </span>
             </div>
             <input
@@ -153,7 +156,7 @@ const PickDrop = ({ tittle, listLocation, handleChangeValue }: PickDropProps) =>
                 {value.time}
               </span>
               <span className="text-grey pointer-events-none my-1 flex items-center">
-                <ArrowDown />
+                <ArrowDown className="fill-current" />
               </span>
             </div>
             <input

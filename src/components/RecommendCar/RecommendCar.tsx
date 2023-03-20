@@ -15,7 +15,7 @@ const RecommendCar = ({ listRecommendCars, onClick, isLoading }: RecommendCarPro
   return (
     <div>
       <div className="flex justify-between">
-        <h2 className="text-grey my-8 text-sm font-semibold leading-[150%] tracking-tight sm:pl-4">
+        <h2 className="text-grey mb-5 text-sm font-semibold leading-[150%] tracking-tight sm:pl-4">
           Recommendation Car
         </h2>
       </div>
@@ -43,6 +43,7 @@ const RecommendCar = ({ listRecommendCars, onClick, isLoading }: RecommendCarPro
                       onclick={() => onClick(car)}
                       cardType="horizontal"
                       carId={car.id}
+                      steering={car.steering}
                     />
                   </div>
                   <div className="s375:block hidden">
@@ -58,6 +59,7 @@ const RecommendCar = ({ listRecommendCars, onClick, isLoading }: RecommendCarPro
                       onclick={() => onClick(car)}
                       cardType="vertical"
                       carId={car.id}
+                      steering={car.steering}
                     />
                   </div>
                 </div>
@@ -89,6 +91,7 @@ const RecommendCar = ({ listRecommendCars, onClick, isLoading }: RecommendCarPro
                       onclick={() => onClick(car)}
                       cardType="horizontal"
                       carId={car.id}
+                      steering={car.steering}
                     />
                   </div>
                   <div className="s375:block hidden">
@@ -104,6 +107,7 @@ const RecommendCar = ({ listRecommendCars, onClick, isLoading }: RecommendCarPro
                       onclick={() => onClick(car)}
                       cardType="vertical"
                       carId={car.id}
+                      steering={car.steering}
                     />
                   </div>
                 </div>

@@ -8,9 +8,10 @@ type SearchType = React.DetailedHTMLProps<
   HTMLInputElement
 > & {
   placeHolder: string;
+  value: string;
 };
 
-export const Search = ({ placeHolder, ...props }: SearchType) => {
+export const Search = ({ placeHolder, value, ...props }: SearchType) => {
   return (
     <div className="md:border-light flex flex-wrap items-center justify-between gap-4 md:rounded-[70px] md:border md:py-3 md:px-6 lg:w-[30rem]">
       <div className="border-light shrink-1 flex grow basis-0 items-center justify-start rounded-[10px] border py-3 pl-6 pr-4 md:border-0 md:p-0">
@@ -20,6 +21,7 @@ export const Search = ({ placeHolder, ...props }: SearchType) => {
         <input
           type="text"
           placeholder={placeHolder}
+          value={value}
           {...props}
           className="placeholder:text-second w-full grow truncate tracking-tight outline-0 placeholder:text-sm placeholder:font-medium placeholder:leading-[150%]"
         />

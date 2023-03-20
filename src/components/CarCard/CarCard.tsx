@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 import Gas from '@/assets/icons/Gas';
 import { Heard } from '@/assets/icons/Heard';
-import ManualCar from '@/assets/icons/ManualCar';
 import People from '@/assets/icons/People';
+import Steering from '@/assets/icons/Steering';
 import Button from '@/components/Button/Button';
 
 type CarProps = {
@@ -21,6 +21,7 @@ type CarProps = {
   imgLg?: string;
   onclick?: React.MouseEventHandler<HTMLDivElement> | undefined;
   carId: string;
+  steering: string;
 };
 
 type CarChild = {
@@ -28,6 +29,7 @@ type CarChild = {
   capacity: number;
   imgSm?: string;
   imgLg?: string;
+  steering: string;
 };
 
 export const CarCard = ({
@@ -43,6 +45,7 @@ export const CarCard = ({
   imgLg,
   onclick,
   carId,
+  steering,
 }: CarProps) => {
   return (
     <div className="relative">
@@ -54,7 +57,7 @@ export const CarCard = ({
         />
       </div>
       <Link
-        to={`detail/${carId}`}
+        to={`/detail/${carId}`}
         className={`min-w-[ block rounded-[10px] bg-white p-4 ${width}] max-w-[${width}]`}
       >
         <div>
@@ -64,9 +67,21 @@ export const CarCard = ({
           <p className="leading-150 text-grey text-xs font-medium tracking-tight">{carType}</p>
         </div>
         {cardType === 'vertical' ? (
-          <ChildVertical gas={gas} capacity={capacity} imgSm={imgSm} imgLg={imgLg} />
+          <ChildVertical
+            gas={gas}
+            capacity={capacity}
+            imgSm={imgSm}
+            imgLg={imgLg}
+            steering={steering}
+          />
         ) : (
-          <ChildHorizontal gas={gas} capacity={capacity} imgSm={imgSm} imgLg={imgLg} />
+          <ChildHorizontal
+            gas={gas}
+            capacity={capacity}
+            imgSm={imgSm}
+            imgLg={imgLg}
+            steering={steering}
+          />
         )}
         <div className="mt-7 flex justify-between">
           <h1 className="text-black-2 font-bold leading-5 tracking-tight">
@@ -81,7 +96,7 @@ export const CarCard = ({
   );
 };
 
-const ChildVertical = ({ gas, capacity, imgSm, imgLg }: CarChild) => {
+const ChildVertical = ({ gas, capacity, imgSm, imgLg, steering }: CarChild) => {
   return (
     <div>
       <div className="relative mt-8 flex justify-center">
@@ -95,8 +110,8 @@ const ChildVertical = ({ gas, capacity, imgSm, imgLg }: CarChild) => {
           <span className="text-grey ml-[5px] text-xs font-medium leading-[15px]">{gas}</span>
         </div>
         <div className="flex items-center">
-          <ManualCar />
-          <span className="text-grey ml-[5px] text-xs font-medium leading-[15px]">Manual</span>
+          <Steering />
+          <span className="text-grey ml-[5px] text-xs font-medium leading-[15px]">{steering}</span>
         </div>
         <div className="flex items-center">
           <People />
@@ -109,7 +124,7 @@ const ChildVertical = ({ gas, capacity, imgSm, imgLg }: CarChild) => {
   );
 };
 
-const ChildHorizontal = ({ gas, capacity, imgSm, imgLg }: CarChild) => {
+const ChildHorizontal = ({ gas, capacity, imgSm, imgLg, steering }: CarChild) => {
   return (
     <div className="mt-3 flex items-end justify-between">
       <div className="relative ml-3">
@@ -123,8 +138,8 @@ const ChildHorizontal = ({ gas, capacity, imgSm, imgLg }: CarChild) => {
           <span className="text-grey ml-[5px] text-xs font-medium leading-[15px]">{gas}</span>
         </div>
         <div className="flex items-center">
-          <ManualCar />
-          <span className="text-grey ml-[5px] text-xs font-medium leading-[15px]">Manual</span>
+          <Steering />
+          <span className="text-grey ml-[5px] text-xs font-medium leading-[15px]">{steering}</span>
         </div>
         <div className="flex items-center">
           <People />

@@ -11,9 +11,33 @@ import LgNissanGTR from '@/assets/images/Car/LgNissanGT-R.png';
 import SmAllNewRush from '@/assets/images/Car/SmAllNewRush.png';
 import SmCRV from '@/assets/images/Car/SmCRV.png';
 import SmKoenigsegg from '@/assets/images/Car/SmKoenigsegg.png';
+import Look1 from '@/assets/images/Car/look1.png';
+import Look2 from '@/assets/images/Car/look2.png';
+import Look3 from '@/assets/images/Car/look3.png';
+import CarPlatform2 from '@/assets/images/CarPlatform2.png';
+import User1 from '@/assets/images/user/user1.png';
+import User2 from '@/assets/images/user/user2.png';
+import User3 from '@/assets/images/user/user3.png';
+import User4 from '@/assets/images/user/user4.png';
+import User5 from '@/assets/images/user/user5.jpg';
+
+export type reviewType = {
+  id: string;
+  userImg: string;
+  name: string;
+  major: string;
+  date: string;
+  content: string;
+  rated: number;
+};
+
+export type carouselType = {
+  btnImg: string[];
+  showImg: string[];
+};
 
 export type carType = {
-  [key: string]: unknown;
+  [key: string]: string | number | boolean | undefined | reviewType[] | carouselType;
   id: string;
   name: string;
   typeBusiness: 'popular' | 'recommend';
@@ -23,7 +47,13 @@ export type carType = {
   gas: string;
   capacity: number;
   price: number;
+  priceWithoutDisCount: number;
   isLiked: boolean;
+  steering: string;
+  rated: number;
+  description: string;
+  review: reviewType[];
+  carouselDetail: carouselType;
 };
 
 export const listAllCar: carType[] = [
@@ -38,6 +68,64 @@ export const listAllCar: carType[] = [
     capacity: 2,
     price: 99,
     isLiked: false,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content:
+          'Pikachu reviewed: We are greatly helped by the services of the MORENT Application',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+      {
+        id: '5',
+        userImg: User5,
+        name: 'Wukong Cartoon',
+        major: 'No job',
+        date: '27 July 2022',
+        content: 'Hello girl',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'popular',
@@ -50,6 +138,54 @@ export const listAllCar: carType[] = [
     capacity: 2,
     price: 80,
     isLiked: false,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'popular',
@@ -62,6 +198,54 @@ export const listAllCar: carType[] = [
     capacity: 4,
     price: 96,
     isLiked: true,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'popular',
@@ -74,6 +258,54 @@ export const listAllCar: carType[] = [
     capacity: 80,
     price: 80,
     isLiked: false,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'popular',
@@ -86,6 +318,54 @@ export const listAllCar: carType[] = [
     capacity: 4,
     price: 96,
     isLiked: true,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'popular',
@@ -98,6 +378,54 @@ export const listAllCar: carType[] = [
     capacity: 2,
     price: 99,
     isLiked: false,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'recommend',
@@ -110,6 +438,54 @@ export const listAllCar: carType[] = [
     capacity: 6,
     price: 72,
     isLiked: false,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'recommend',
@@ -122,6 +498,54 @@ export const listAllCar: carType[] = [
     capacity: 6,
     price: 80,
     isLiked: true,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'recommend',
@@ -134,6 +558,54 @@ export const listAllCar: carType[] = [
     capacity: 6,
     price: 74,
     isLiked: false,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'recommend',
@@ -146,6 +618,54 @@ export const listAllCar: carType[] = [
     capacity: 6,
     price: 80,
     isLiked: false,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'recommend',
@@ -158,6 +678,54 @@ export const listAllCar: carType[] = [
     capacity: 4,
     price: 76,
     isLiked: true,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'recommend',
@@ -170,6 +738,54 @@ export const listAllCar: carType[] = [
     capacity: 6,
     price: 80,
     isLiked: false,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'recommend',
@@ -182,6 +798,54 @@ export const listAllCar: carType[] = [
     capacity: 4,
     price: 74,
     isLiked: true,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'recommend',
@@ -194,6 +858,54 @@ export const listAllCar: carType[] = [
     capacity: 6,
     price: 80,
     isLiked: false,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'recommend',
@@ -206,6 +918,54 @@ export const listAllCar: carType[] = [
     capacity: 6,
     price: 80,
     isLiked: false,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'recommend',
@@ -218,6 +978,54 @@ export const listAllCar: carType[] = [
     capacity: 4,
     price: 74,
     isLiked: true,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
   {
     typeBusiness: 'recommend',
@@ -230,5 +1038,53 @@ export const listAllCar: carType[] = [
     capacity: 6,
     price: 80,
     isLiked: false,
+    steering: 'Manual',
+    rated: 4,
+    priceWithoutDisCount: 150,
+    description: `NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`,
+    review: [
+      {
+        id: '1',
+        userImg: User1,
+        name: 'Alex Stanton',
+        major: 'CEO at Bukalapak',
+        date: '21 July 2022',
+        content:
+          'We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '2',
+        userImg: User2,
+        name: 'Skylar Dias',
+        major: 'CEO at Amazon',
+        date: '20 July 2022',
+        content:
+          'We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.',
+        rated: 4,
+      },
+      {
+        id: '3',
+        userImg: User3,
+        name: 'Pikachu',
+        major: 'CEO at Pokemon',
+        date: '25 July 2022',
+        content: 'Pikachu reviewed',
+        rated: 5,
+      },
+      {
+        id: '4',
+        userImg: User4,
+        name: 'Girl',
+        major: 'No job',
+        date: '26 July 2022',
+        content: 'Reviewed',
+        rated: 5,
+      },
+    ],
+    carouselDetail: {
+      showImg: [CarPlatform2, Look2, Look3],
+      btnImg: [Look1, Look2, Look3],
+    },
   },
 ];

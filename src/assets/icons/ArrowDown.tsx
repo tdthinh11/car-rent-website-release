@@ -1,10 +1,17 @@
-export const ArrowDown = () => {
+import { Icon } from './Icon';
+
+export const ArrowDown = ({ className }: Icon) => {
   return (
-    <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      className={className}
+      width="10"
+      height="6"
+      viewBox="0 0 10 6"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M5.00025 5.3997C4.65025 5.3997 4.30025 5.2647 4.03525 4.9997L0.775254 1.7397C0.630254 1.5947 0.630254 1.3547 0.775254 1.2097C0.920254 1.0647 1.16025 1.0647 1.30525 1.2097L4.56525 4.4697C4.80525 4.7097 5.19525 4.7097 5.43525 4.4697L8.69525 1.2097C8.84025 1.0647 9.08025 1.0647 9.22525 1.2097C9.37025 1.3547 9.37025 1.5947 9.22525 1.7397L5.96525 4.9997C5.70025 5.2647 5.35025 5.3997 5.00025 5.3997Z"
-        fill="#1A202C"
-        stroke="#1A202C"
         strokeWidth="0.5"
       />
     </svg>

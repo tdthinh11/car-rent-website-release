@@ -7,16 +7,16 @@ type PopularProps = {
   listPopularCars: carType[];
   onClick: (car: carType) => void | React.MouseEventHandler<HTMLDivElement> | undefined;
   isLoading?: boolean;
+  title?: string;
 };
-
-const PopularCar = ({ listPopularCars, onClick, isLoading }: PopularProps) => {
+const PopularCar = ({ listPopularCars, onClick, isLoading, title = 'Popular' }: PopularProps) => {
   const [isViewAll, setIsViewAll] = useState<boolean>(false);
   const [isLoadingView, setIsLoading] = useState<boolean>(false);
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h2 className="text-grey my-8 mb-5 text-sm font-semibold leading-[150%] tracking-tight sm:pl-4">
-          Popular
+        <h2 className="text-grey mb-5 text-sm font-semibold leading-[150%] tracking-tight sm:pl-4">
+          {title}
         </h2>
         <button
           className="text-primary text-xs font-semibold leading-[15px]"
@@ -53,6 +53,7 @@ const PopularCar = ({ listPopularCars, onClick, isLoading }: PopularProps) => {
                     imgLg={car.imgLg}
                     onclick={() => onClick(car)}
                     carId={car.id}
+                    steering={car.steering}
                   />
                 </div>
               );
@@ -81,6 +82,7 @@ const PopularCar = ({ listPopularCars, onClick, isLoading }: PopularProps) => {
                     imgLg={car.imgLg}
                     onclick={() => onClick(car)}
                     carId={car.id}
+                    steering={car.steering}
                   />
                 </div>
               );

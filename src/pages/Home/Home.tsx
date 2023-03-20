@@ -108,16 +108,20 @@ const Home = () => {
             </div>
           )}
         </div>
-        <PopularCar
-          listPopularCars={listPopularCar}
-          onClick={changeStatusIsLiked}
-          isLoading={isLoading}
-        />
-        <RecommendCar
-          listRecommendCars={listRecommendCar}
-          onClick={changeStatusIsLiked}
-          isLoading={isLoading}
-        />
+        <div className="mt-8">
+          <PopularCar
+            listPopularCars={listPopularCar}
+            onClick={changeStatusIsLiked}
+            isLoading={isLoading}
+          />
+        </div>
+        <div className="mt-8">
+          <RecommendCar
+            listRecommendCars={listRecommendCar}
+            onClick={changeStatusIsLiked}
+            isLoading={isLoading}
+          />
+        </div>
       </div>
     </div>
   );

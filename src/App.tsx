@@ -9,6 +9,7 @@ import Home from '@/pages/Home/Home';
 import store from '@/store/store';
 
 import { Detail } from './pages/Detail/Detail';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="detail/:carId" element={<Detail />} />
               </Route>
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Provider>
         </AuthProvider>
