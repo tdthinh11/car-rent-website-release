@@ -30,7 +30,7 @@ export const Detail = () => {
       behavior: 'smooth',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [carId]);
+  }, [carId, listPopularCar]);
 
   useEffect(() => {
     dispatch(carActionThunk.getListCarsApi(searchKey));
@@ -78,7 +78,10 @@ export const Detail = () => {
                 <div>
                   <Rating total={5} rated={carDetail?.rated ? carDetail?.rated : 0} />
                 </div>
-                <p className="text-grey mx-2 text-xs font-medium leading-[18px]">440+ Reviewer</p>
+                <p className="text-grey mx-2 text-xs font-medium leading-[18px]">
+                  {carDetail && carDetail?.review.length > 2 ? '2+' : carDetail?.review.length}{' '}
+                  Reviewer
+                </p>
               </div>
             </div>
             <p className="leading-200 text-grey my-4 text-xs tracking-tight md:my-8">{`NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving ground, the "race track".`}</p>
