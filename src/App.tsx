@@ -8,6 +8,7 @@ import { WrapperLayout } from '@/layout/WrapperLayout/WrapperLayout';
 import Home from '@/pages/Home/Home';
 import store from '@/store/store';
 
+import { Category } from './pages/Category/Category';
 import { Detail } from './pages/Detail/Detail';
 import NotFound from './pages/NotFound';
 
@@ -21,6 +22,7 @@ function App() {
               <Route path="/" element={<WrapperLayout />}>
                 <Route path="/" element={<Home />} />
                 <Route path="detail/:carId" element={<Detail />} />
+                <Route path="category" element={<Category />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>

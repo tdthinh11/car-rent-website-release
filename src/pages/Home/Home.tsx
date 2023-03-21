@@ -17,6 +17,8 @@ const Home = () => {
   const [isSwap, setIsSwap] = useState<boolean>(false);
   const [pickUpValue, setPickUpValue] = useState<IValue>();
   const [dropOffValue, setDropOffValue] = useState<IValue>();
+  const [dropChecked, setDropChecked] = useState<boolean>(false);
+  const [pickChecked, setPickChecked] = useState<boolean>(false);
 
   const { searchKey, listPopularCar, listRecommendCar, locations, isLoading } = useAppSelector(
     (state) => state.carReducer,
@@ -63,50 +65,34 @@ const Home = () => {
             />
           </div>
         </div>
-        <div className="mt-8 lg:flex lg:items-center lg:justify-between lg:gap-11">
-          {isSwap ? (
-            <div className="grow basis-0">
+        <div className="relative">
+          <div className="mt-8 flex flex-col items-center justify-between gap-8 md:flex-row md:gap-12 lg:gap-36">
+            <div className={`w-full grow basis-0 ${isSwap ? 'order-1' : 'order-2'}`}>
               <PickDrop
-                tittle="Pick - up"
+                tittle="Pick - Up"
                 listLocation={locations}
                 value={pickUpValue}
                 handleChangeValue={setPickUpValue}
+                handleChangeCheckBox={() => setPickChecked((prev) => !prev)}
+                id="pick-up"
+                isChecked={pickChecked}
               />
             </div>
-          ) : (
-            <div className="grow basis-0">
+            <div className={`w-full grow basis-0 ${isSwap ? 'order-2' : 'order-1'}`}>
               <PickDrop
-                tittle="Drop - Off"
+                tittle="Drop-Off"
                 listLocation={locations}
                 value={dropOffValue}
                 handleChangeValue={setDropOffValue}
+                handleChangeCheckBox={() => setDropChecked((prev) => !prev)}
+                id="drop-off"
+                isChecked={dropChecked}
               />
-            </div>
-          )}
-          <div className="relative h-8 lg:h-full">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:relative lg:top-0 lg:left-0 lg:translate-x-0 lg:translate-y-0">
-              <SwapButton handleSwap={setIsSwap} />
             </div>
           </div>
-          {isSwap ? (
-            <div className="grow basis-0">
-              <PickDrop
-                tittle="Drop - Off"
-                listLocation={locations}
-                value={dropOffValue}
-                handleChangeValue={setDropOffValue}
-              />
-            </div>
-          ) : (
-            <div className="grow basis-0">
-              <PickDrop
-                tittle="Pick - up"
-                listLocation={locations}
-                value={pickUpValue}
-                handleChangeValue={setPickUpValue}
-              />
-            </div>
-          )}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <SwapButton handleSwap={setIsSwap} />
+          </div>
         </div>
         <div className="mt-8">
           <PopularCar

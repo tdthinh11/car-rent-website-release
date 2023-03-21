@@ -16,7 +16,8 @@ module.exports = {
         bg: "#F6F7F9",
         primary: "#3563E9",
         secondary: "#54A6FF",
-        'light-blue': "rgba(53, 99, 233, 0.3)"
+        'light-blue': "rgba(53, 99, 233, 0.3)",
+        'light-blue-1': "rgba(92, 175, 252, 0.3)"
       },
       backgroundImage: {
         'shadow-1': 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%);'

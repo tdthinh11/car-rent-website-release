@@ -32,10 +32,10 @@ const Header = () => {
   };
   return (
     <div className="bg-white">
-      <div className="wrapper py-8 px-6 md:py-10 md:px-16">
+      <div className="py-8 px-6 md:py-10 md:pl-16 md:pr-8">
         <div className="mb-8 flex items-center justify-between md:mb-0">
           <div className="flex items-center">
-            {params.pathname.includes('/detail/') ? (
+            {params.pathname !== '/' ? (
               <div>
                 <div className="md:hidden">
                   <Popover className="relative flex items-center">
@@ -122,7 +122,7 @@ const Header = () => {
           </div>
         </div>
         <div className="md:hidden ">
-          {params.pathname.includes('/detail/') ? (
+          {params.pathname !== '/' ? (
             <div className="mb-6">
               <Link
                 to="/"

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { carType, reviewType } from '@/assets/data/cars';
 import { ArrowDown } from '@/assets/icons/ArrowDown';
 import Button from '@/components/Button/Button';
-import { CarouseLookCar } from '@/components/CarouseLookCar';
+import { CarouseLookCar } from '@/components/CarouseLookCar/CarouseLookCar';
 import PopularCar from '@/components/PopularCar/PopularCar';
 import { Rating } from '@/components/Rating/Rating';
 import { ReviewItem } from '@/components/Review/Review';

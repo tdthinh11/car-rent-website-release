@@ -13,7 +13,7 @@ type AdsProps = {
 
 const AdsCard = ({ bgUrl, btnVariant, title, description, btnText, classNames = '' }: AdsProps) => {
   return (
-    <div className={`relative rounded-[10px] ${classNames}`}>
+    <div className={`relative overflow-hidden rounded-[10px] ${classNames}`}>
       <div
         style={{ backgroundImage: `url(${bgUrl})` }}
         className="min-h-[250px] bg-cover bg-bottom bg-no-repeat p-4"
