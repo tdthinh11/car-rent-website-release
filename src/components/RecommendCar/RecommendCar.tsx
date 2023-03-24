@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import { carType } from '@/assets/data/cars';
 import Button from '@/components/Button/Button';
 import { CarCard } from '@/components/CarCard/CarCard';
+import { carType } from '@/model/cars';
 
 type RecommendCarProps = {
   listRecommendCars: carType[];
@@ -11,7 +11,7 @@ type RecommendCarProps = {
 };
 const RecommendCar = ({ listRecommendCars, onClick, isLoading }: RecommendCarProps) => {
   const [isViewAll, setIsViewAll] = useState<boolean>(false);
-  const [isLoadingView, setIsLoading] = useState<boolean>(false);
+  const [isLoadingAll, setIsLoadingAll] = useState<boolean>(false);
   return (
     <div>
       <div className="flex justify-between">
@@ -21,112 +21,108 @@ const RecommendCar = ({ listRecommendCars, onClick, isLoading }: RecommendCarPro
       </div>
       {isLoading ? (
         <h3 className="my-5 text-center">Loading ...</h3>
-      ) : isViewAll ? (
-        <div className="flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:gap-4 lg:gap-8">
-          {listRecommendCars.length > 0 ? (
-            listRecommendCars.map((car) => {
-              return (
-                <div
-                  key={`${car.id}`}
-                  className="min-w-[282px] sm:min-w-[304px] sm:max-w-[304px] lg:min-w-[304px]"
-                >
-                  <div className="s375:hidden">
-                    <CarCard
-                      carName={car.name}
-                      carType={car.type}
-                      capacity={car.capacity}
-                      gas={car.gas}
-                      price={car.price}
-                      isLiked={car.isLiked}
-                      imgSm={car.imgSm}
-                      imgLg={car.imgLg}
-                      onclick={() => onClick(car)}
-                      cardType="horizontal"
-                      carId={car.id}
-                      steering={car.steering}
-                    />
-                  </div>
-                  <div className="s375:block hidden">
-                    <CarCard
-                      carName={car.name}
-                      carType={car.type}
-                      capacity={car.capacity}
-                      gas={car.gas}
-                      price={car.price}
-                      isLiked={car.isLiked}
-                      imgSm={car.imgSm}
-                      imgLg={car.imgLg}
-                      onclick={() => onClick(car)}
-                      cardType="vertical"
-                      carId={car.id}
-                      steering={car.steering}
-                    />
-                  </div>
-                </div>
-              );
-            })
-          ) : (
-            <h3 className="grow text-center opacity-50">List of cars are empty</h3>
-          )}
-        </div>
       ) : (
         <div className="flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:gap-4 lg:gap-8">
           {listRecommendCars.length > 0 ? (
-            listRecommendCars.slice(0, 4).map((car) => {
-              return (
-                <div
-                  key={`${car.id}`}
-                  className="min-w-[282px] sm:min-w-[304px] sm:max-w-[304px] lg:min-w-[304px]"
-                >
-                  <div className="s375:hidden">
-                    <CarCard
-                      carName={car.name}
-                      carType={car.type}
-                      capacity={car.capacity}
-                      gas={car.gas}
-                      price={car.price}
-                      isLiked={car.isLiked}
-                      imgSm={car.imgSm}
-                      imgLg={car.imgLg}
-                      onclick={() => onClick(car)}
-                      cardType="horizontal"
-                      carId={car.id}
-                      steering={car.steering}
-                    />
+            isViewAll ? (
+              listRecommendCars.map((car) => {
+                return (
+                  <div
+                    key={`${car.id}`}
+                    className="min-w-[282px] sm:min-w-[304px] sm:max-w-[304px] lg:min-w-[304px]"
+                  >
+                    <div className="s375:hidden">
+                      <CarCard
+                        carName={car.name}
+                        carType={car.type}
+                        capacity={car.capacity}
+                        gas={car.gas}
+                        price={car.price}
+                        isLiked={car.isLiked}
+                        imgSm={car.imgSm}
+                        imgLg={car.imgLg}
+                        onClickLike={() => onClick(car)}
+                        cardType="horizontal"
+                        carId={car.id}
+                        steering={car.steering}
+                      />
+                    </div>
+                    <div className="s375:block hidden">
+                      <CarCard
+                        carName={car.name}
+                        carType={car.type}
+                        capacity={car.capacity}
+                        gas={car.gas}
+                        price={car.price}
+                        isLiked={car.isLiked}
+                        imgSm={car.imgSm}
+                        imgLg={car.imgLg}
+                        onClickLike={() => onClick(car)}
+                        cardType="vertical"
+                        carId={car.id}
+                        steering={car.steering}
+                      />
+                    </div>
                   </div>
-                  <div className="s375:block hidden">
-                    <CarCard
-                      carName={car.name}
-                      carType={car.type}
-                      capacity={car.capacity}
-                      gas={car.gas}
-                      price={car.price}
-                      isLiked={car.isLiked}
-                      imgSm={car.imgSm}
-                      imgLg={car.imgLg}
-                      onclick={() => onClick(car)}
-                      cardType="vertical"
-                      carId={car.id}
-                      steering={car.steering}
-                    />
+                );
+              })
+            ) : (
+              listRecommendCars.slice(0, 4).map((car) => {
+                return (
+                  <div
+                    key={`${car.id}`}
+                    className="min-w-[282px] sm:min-w-[304px] sm:max-w-[304px] lg:min-w-[304px]"
+                  >
+                    <div className="s375:hidden">
+                      <CarCard
+                        carName={car.name}
+                        carType={car.type}
+                        capacity={car.capacity}
+                        gas={car.gas}
+                        price={car.price}
+                        isLiked={car.isLiked}
+                        imgSm={car.imgSm}
+                        imgLg={car.imgLg}
+                        onClickLike={() => onClick(car)}
+                        cardType="horizontal"
+                        carId={car.id}
+                        steering={car.steering}
+                      />
+                    </div>
+                    <div className="s375:block hidden">
+                      <CarCard
+                        carName={car.name}
+                        carType={car.type}
+                        capacity={car.capacity}
+                        gas={car.gas}
+                        price={car.price}
+                        isLiked={car.isLiked}
+                        imgSm={car.imgSm}
+                        imgLg={car.imgLg}
+                        onClickLike={() => onClick(car)}
+                        cardType="vertical"
+                        carId={car.id}
+                        steering={car.steering}
+                      />
+                    </div>
                   </div>
-                </div>
-              );
-            })
+                );
+              })
+            )
           ) : (
             <h3 className="grow text-center opacity-50">List of cars are empty</h3>
           )}
         </div>
       )}
-      {isLoadingView && <h3 className="my-5 text-center">Loading ...</h3>}
+      {isLoadingAll && <h3 className="my-5 text-center">Loading ...</h3>}
       <div className="relative mt-12 text-center">
         <Button
           variant="primary"
           onClick={() => {
-            setIsLoading(true);
+            setIsLoadingAll(true);
             window.setTimeout(() => {
               setIsViewAll((prev) => !prev);
-              setIsLoading(false);
+              setIsLoadingAll(false);
             }, 1000);
           }}
         >

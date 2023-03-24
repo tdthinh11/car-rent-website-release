@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-import { DOMAIN } from '@/utils/contain';
+import { DOMAIN } from '@/utils/constant';
 
 const axiosInstance = Axios.create({
   baseURL: DOMAIN,

@@ -4,7 +4,24 @@ export const BUS_TYPE = {
   RECOMMEND: 'recommend',
 };
 
+export enum TypeCategory {
+  Sport = 'sport',
+  SUV = 'suv',
+  MPV = 'mvp',
+  Sedan = 'sedan',
+  Couple = 'couple',
+  Hatchback = 'hatchback',
+}
+
+export enum CapacityCategory {
+  Two = '2',
+  Four = '4',
+  Six = '6',
+  Eight = '8',
+}
+
 export const GET_POPULAR_CARS = 'list-popular-cars';
 export const GET_RECOMMEND_CARS = 'list-recommend-cars';
 export const GET_LOCATION = 'list-location';
 export const SEARCH = 'search';
+export const CATEGORY = 'category';

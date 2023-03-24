@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { carType } from '@/assets/data/cars';
 import { CarCard } from '@/components/CarCard/CarCard';
+import { carType } from '@/model/cars';
 
 type PopularProps = {
   listPopularCars: carType[];
@@ -51,7 +51,7 @@ const PopularCar = ({ listPopularCars, onClick, isLoading, title = 'Popular' }: 
                     isLiked={car.isLiked}
                     imgSm={car.imgSm}
                     imgLg={car.imgLg}
-                    onclick={() => onClick(car)}
+                    onClickLike={() => onClick(car)}
                     carId={car.id}
                     steering={car.steering}
                   />
@@ -65,7 +65,7 @@ const PopularCar = ({ listPopularCars, onClick, isLoading, title = 'Popular' }: 
       ) : (
         <div className="car-card flex snap-x gap-5 overflow-x-auto overflow-y-hidden sm:flex-row sm:flex-wrap sm:gap-4 lg:gap-8">
           {listPopularCars.length > 0 ? (
-            listPopularCars.slice(0, 2).map((car) => {
+            listPopularCars.slice(0, 3).map((car) => {
               return (
                 <div
                   key={`${car.id}`}
@@ -80,7 +80,7 @@ const PopularCar = ({ listPopularCars, onClick, isLoading, title = 'Popular' }: 
                     isLiked={car.isLiked}
                     imgSm={car.imgSm}
                     imgLg={car.imgLg}
-                    onclick={() => onClick(car)}
+                    onClickLike={() => onClick(car)}
                     carId={car.id}
                     steering={car.steering}
                   />

@@ -11,9 +11,15 @@ export const Rating = ({ total, rated }: RatingProps) => {
   const renderRating = () => {
     const rating: React.ReactNode[] = [];
     for (let index = 0; index < total; index++) {
-      index < rated
-        ? rating.push(<Star key={index} className="text-yellow cursor-pointer fill-current" />)
-        : rating.push(<Star key={index} className="text-grey cursor-pointer stroke-current" />);
+      rating.push(
+        <div key={index}>
+          <Star
+            className={`cursor-pointer ${
+              index < rated ? 'text-yellow fill-current' : 'text-grey stroke-current'
+            }`}
+          />
+        </div>,
+      );
     }
     return rating;
   };

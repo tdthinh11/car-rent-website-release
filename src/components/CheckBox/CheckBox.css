@@ -1,0 +1,35 @@
+input[type='checkbox'] ~ .checkbox-square {
+  border: 1px solid #90a3bf;
+}
+
+input[type='checkbox'] ~ .checkbox-square .square-icon {
+  display: none;
+}
+
+input[type='checkbox']:checked ~ .checkbox-square {
+  border: 1px solid transparent;
+}
+
+input[type='checkbox']:checked ~ .checkbox-square .square-icon {
+  display: block;
+}
+
+input[type='checkbox'] ~ .checkbox-circle {
+  background-color: rgba(92, 175, 252, 0.3);
+}
+
+input[type='checkbox']:checked ~ .checkbox-circle {
+  background-color: rgba(53, 99, 233, 0.3);
+}
+
+input[type='checkbox'] ~ .checkbox-circle::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #54a6ff;
+}
+
+input[type='checkbox']:checked ~ .checkbox-circle::after {
+  background-color: #3563e9;
+}

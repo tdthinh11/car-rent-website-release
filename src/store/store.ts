@@ -1,9 +1,11 @@
 import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import carReducer from './carSlice';
+import drawerSlice from './drawerSlice';
 
 const rootReducer = combineReducers({
   carReducer,
+  drawerSlice,
 });
 
 const store = configureStore({
@@ -12,7 +14,6 @@ const store = configureStore({
 
 // // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
-// // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
 export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,

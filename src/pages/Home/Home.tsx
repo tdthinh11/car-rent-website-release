@@ -1,46 +1,48 @@
 import { useEffect, useState } from 'react';
 
-import { carType } from '@/assets/data/cars';
 import CarPlatform2 from '@/assets/images/CarPlatform2.png';
 import CarPlatform from '@/assets/images/CarPlatform.png';
-import PickDrop, { IValue } from '@/components/PickDrop/PickDrop';
+import PickDrop, { IPickDropValue } from '@/components/PickDrop/PickDrop';
 import PopularCar from '@/components/PopularCar/PopularCar';
 import RecommendCar from '@/components/RecommendCar/RecommendCar';
 import { SwapButton } from '@/components/SwapButton/SwapButton';
+import { carType } from '@/model/cars';
 import AdsCard from '@/pages/Home/AdsCard';
 import { carActionThunk } from '@/store/carSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 
 import './style.css';
 
+const initPickDropValue: IPickDropValue = {
+  location: null,
+  date: '',
+  time: '',
+};
+
 const Home = () => {
   const [isSwap, setIsSwap] = useState<boolean>(false);
-  const [pickUpValue, setPickUpValue] = useState<IValue>();
-  const [dropOffValue, setDropOffValue] = useState<IValue>();
+  const [pickUpValue, setPickUpValue] = useState<IPickDropValue>(initPickDropValue);
+  const [dropOffValue, setDropOffValue] = useState<IPickDropValue>(initPickDropValue);
   const [dropChecked, setDropChecked] = useState<boolean>(false);
   const [pickChecked, setPickChecked] = useState<boolean>(false);
 
-  const { searchKey, listPopularCar, listRecommendCar, locations, isLoading } = useAppSelector(
-    (state) => state.carReducer,
-  );
+  const { searchKey, listAll, locations, isLoading } = useAppSelector((state) => state.carReducer);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(carActionThunk.getListCarsApi(searchKey));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchKey]);
+  }, [dispatch, searchKey]);
 
   useEffect(() => {
     dispatch(carActionThunk.getListLocation());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   const changeStatusIsLiked = (car: carType) => {
     dispatch(carActionThunk.changeIsLikeStatus(car));
   };
 
   return (
-    <div className="relative">
+    <div className="wrapper relative">
       <div className="md-hidden md:bg-bg absolute top-0 h-36 w-full bg-white"></div>
       <div className="relative px-6 pb-12 md:px-16">
         <div className="justify-between gap-8 md:mt-8 md:flex">
@@ -96,14 +98,14 @@ const Home = () => {
         </div>
         <div className="mt-8">
           <PopularCar
-            listPopularCars={listPopularCar}
+            listPopularCars={listAll.filter((car: carType) => car.typeBusiness === 'popular')}
             onClick={changeStatusIsLiked}
             isLoading={isLoading}
           />
         </div>
         <div className="mt-8">
           <RecommendCar
-            listRecommendCars={listRecommendCar}
+            listRecommendCars={listAll.filter((car: carType) => car.typeBusiness === 'recommend')}
             onClick={changeStatusIsLiked}
             isLoading={isLoading}
           />

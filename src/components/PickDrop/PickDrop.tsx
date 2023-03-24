@@ -1,20 +1,16 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/20/solid';
 
 import { ArrowDown } from '@/assets/icons/ArrowDown';
+import { ILocation } from '@/model/selection';
 
-import { CheckBox } from '../CheckBox/CheckBox';
+import CheckBox from '../CheckBox/CheckBox';
 import './PickDrop.css';
 
-interface ILocation {
-  id: number | null;
-  value: string;
-}
-
-export interface IValue {
-  location: ILocation;
+export interface IPickDropValue {
+  location: ILocation | null;
   date: string;
   time: string;
 }
@@ -23,8 +19,8 @@ interface PickDropProps {
   tittle: string;
   listLocation: ILocation[];
   classNames?: string;
-  value?: IValue;
-  handleChangeValue: (value: IValue) => void;
+  value: IPickDropValue;
+  handleChangeValue: (value: IPickDropValue) => void;
   isChecked?: boolean;
   id: string;
   handleChangeCheckBox: React.ChangeEventHandler<HTMLInputElement>;
@@ -38,26 +34,28 @@ const PickDrop = ({
   id,
   handleChangeCheckBox,
 }: PickDropProps) => {
-  const [value, setValue] = useState<IValue>({
-    location: { id: null, value: '' },
+  const [value, setValue] = useState<IPickDropValue>({
+    location: null,
     date: '',
     time: '',
   });
+
+  useEffect(() => {
+    handleChangeValue({
+      ...value,
+      location: value.location,
+      date: value.date,
+      time: value.time,
+    });
+  }, [handleChangeValue, value]);
+
   const handleChangeLocation = (valueLocation: ILocation) => {
     setValue({
       ...value,
       location: valueLocation,
     });
-    handleChangeValue({
-      ...value,
-      location: valueLocation,
-    });
   };
   const handleChangeDate: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    handleChangeValue({
-      ...value,
-      date: e.target.value,
-    });
     setValue({
       ...value,
       date: e.target.value,
@@ -68,21 +66,16 @@ const PickDrop = ({
       ...value,
       time: e.target.value,
     });
-
-    handleChangeValue({
-      ...value,
-      time: e.target.value,
-    });
   };
 
   return (
     <div className="rounded-[10px] bg-white py-4">
       <div className="mb-6 flex items-center px-4">
-        <CheckBox id={id} label={tittle} checked={isChecked} onChange={handleChangeCheckBox} />
+        <CheckBox id={id} label={tittle} onChange={handleChangeCheckBox} />
       </div>
       <div className="s375:flex s375:justify-between relative">
         {!isChecked && (
-          <div className="absolute top-0 left-0 z-50 h-full w-full cursor-not-allowed" />
+          <div className="absolute top-0 left-0 z-[1] h-full w-full cursor-not-allowed" />
         )}
         <div className="s375:grow s375:border-r s375:basis-0 border-light px-4">
           <h3>Location</h3>

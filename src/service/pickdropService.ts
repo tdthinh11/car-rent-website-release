@@ -1,5 +1,5 @@
-import { listLocation } from '@/assets/data/selection';
-import { GET_LOCATION } from '@/utils/contain';
+import { listLocation } from '@/model/selection';
+import { GET_LOCATION } from '@/utils/constant';
 import { getUrl } from '@/utils/helper';
 
 import api from './axios';

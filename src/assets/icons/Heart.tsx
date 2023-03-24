@@ -1,6 +1,6 @@
 import { Icon } from './Icon';
 
-export const Heard = ({ className = '' }: Icon) => {
+export const Heart = ({ className = '' }: Icon) => {
   return (
     <svg
       className={className}

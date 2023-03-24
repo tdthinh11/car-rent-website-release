@@ -1,27 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { carType, reviewType } from '@/assets/data/cars';
 import { ArrowDown } from '@/assets/icons/ArrowDown';
 import Button from '@/components/Button/Button';
 import { CarouseLookCar } from '@/components/CarouseLookCar/CarouseLookCar';
 import PopularCar from '@/components/PopularCar/PopularCar';
 import { Rating } from '@/components/Rating/Rating';
 import { ReviewItem } from '@/components/Review/Review';
+import { carType, reviewType } from '@/model/cars';
 import AdsCard from '@/pages/Home/AdsCard';
 import { carActionThunk } from '@/store/carSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 
 export const Detail = () => {
   const [isShowAll, setIsShowAll] = useState<boolean>(false);
-  const [isLoadingView, setIsLoadingView] = useState<boolean>(false);
+  const [isLoadingAll, setIsLoadingView] = useState<boolean>(false);
   const [sliderData, setSliderData] = useState<React.ReactNode[]>([]);
   const [sliderBtnImg, setSliderBtnImg] = useState<string[]>([]);
   const { carId } = useParams();
   const dispatch = useAppDispatch();
-  const { carDetail, searchKey, listPopularCar, listRecommendCar, isLoading } = useAppSelector(
-    (state) => state.carReducer,
-  );
+  const { carDetail, searchKey, listAll, isLoading } = useAppSelector((state) => state.carReducer);
 
   useEffect(() => {
     carId && dispatch(carActionThunk.updateCarDetailThunk(carId));
@@ -30,7 +28,7 @@ export const Detail = () => {
       behavior: 'smooth',
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [carId, listPopularCar]);
+  }, [carId, listAll]);
 
   useEffect(() => {
     dispatch(carActionThunk.getListCarsApi(searchKey));
@@ -65,7 +63,7 @@ export const Detail = () => {
   };
 
   return (
-    <div className="mx-auto mb-8 max-w-5xl px-6 md:px-16">
+    <div className="mx-auto mb-8 max-w-5xl px-6">
       <div className="md:flex md:gap-8">
         <CarouseLookCar sliderData={sliderData} sliderButton={sliderBtnImg} />
         <div className="mt-8 rounded-[10px] bg-white p-4 md:flex md:grow md:basis-0 md:flex-col md:justify-between">
@@ -176,7 +174,7 @@ export const Detail = () => {
                   />
                 );
               })}
-          {isLoadingView && (
+          {isLoadingAll && (
             <p className="text-grey mt-8 mb-[26px] flex cursor-pointer items-center justify-center gap-2">
               Loading ...
             </p>
@@ -220,7 +218,7 @@ export const Detail = () => {
       </div>
       <div className="mt-8">
         <PopularCar
-          listPopularCars={listPopularCar}
+          listPopularCars={listAll.filter((car: carType) => car.typeBusiness === 'popular')}
           onClick={changeStatusIsLiked}
           isLoading={isLoading}
         />
@@ -228,7 +226,7 @@ export const Detail = () => {
       <div className="mt-8">
         <PopularCar
           title="Recommend"
-          listPopularCars={listRecommendCar}
+          listPopularCars={listAll.filter((car: carType) => car.typeBusiness === 'recommend')}
           onClick={changeStatusIsLiked}
           isLoading={isLoading}
         />

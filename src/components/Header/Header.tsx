@@ -3,12 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { Popover } from '@headlessui/react';
 
-import { Heard } from '@/assets/icons/Heard';
+import { Heart } from '@/assets/icons/Heart';
 import Menu from '@/assets/icons/Menu';
 import { Notification } from '@/assets/icons/Notification';
 import { Setting } from '@/assets/icons/Setting';
 import User from '@/assets/images/user.png';
-import { changeSearchKey } from '@/store/carSlice';
+import { carActionThunk, changeSearchKey } from '@/store/carSlice';
 import { useAppDispatch } from '@/store/hook';
 
 import { Search } from '../Search/Search';
@@ -20,6 +20,7 @@ const Header = () => {
   const [searchText, setSearchText] = useState<string>('');
   const debounceRef = useRef<NodeJS.Timeout>();
   useEffect(() => {
+    dispatch(carActionThunk.getCategoryData());
     debounceRef.current ?? clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => {
       dispatch(changeSearchKey(searchText));
@@ -32,7 +33,7 @@ const Header = () => {
   };
   return (
     <div className="bg-white">
-      <div className="py-8 px-6 md:py-10 md:pl-16 md:pr-8">
+      <div className="wrapper py-8 px-6 md:py-10 md:pl-16 md:pr-8">
         <div className="mb-8 flex items-center justify-between md:mb-0">
           <div className="flex items-center">
             {params.pathname !== '/' ? (
@@ -85,7 +86,7 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-2 lg:gap-5">
             <div className="sm:border-light hidden h-11 w-11 p-3 hover:cursor-pointer sm:flex sm:items-center sm:justify-center sm:rounded-full sm:border">
-              <Heard className="fill-current text-[#596780]" />
+              <Heart className="fill-current text-[#596780]" />
             </div>
             <div className="sm:border-light notification relative hidden h-11 w-11 p-3 hover:cursor-pointer sm:flex sm:items-center sm:justify-center sm:rounded-full sm:border">
               <Notification />

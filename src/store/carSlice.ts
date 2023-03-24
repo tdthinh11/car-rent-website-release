@@ -1,28 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { carType } from '@/assets/data/cars';
-import { carServices } from '@/service/carServices';
+import { carType } from '@/model/cars';
+import { carServices, categoryType } from '@/service/carServices';
 
 import { AppThunk } from './store';
 
 export type carReducerType = {
   searchKey: string;
-  listPopularCar: [];
-  listRecommendCar: [];
   listAll: [];
   locations: [];
   isLoading: boolean;
   carDetail: carType | null;
+  categoryValue: categoryType[];
 };
 
 const initialState: carReducerType = {
   searchKey: '',
-  listPopularCar: [],
-  listRecommendCar: [],
   listAll: [],
   locations: [],
   isLoading: false,
   carDetail: null,
+  categoryValue: [],
 };
 
 const carSlice = createSlice({
@@ -33,9 +31,7 @@ const carSlice = createSlice({
       state.searchKey = action.payload;
     },
     updateListCar: (state, action) => {
-      state.listPopularCar = action.payload.listPopularCar;
-      state.listRecommendCar = action.payload.listRecommendCar;
-      state.listAll = action.payload.listAll;
+      state.listAll = action.payload;
     },
     getLocation: (state, action) => {
       state.locations = action.payload;
@@ -46,11 +42,20 @@ const carSlice = createSlice({
     updateCarDetail: (state, action) => {
       state.carDetail = action.payload;
     },
+    updateCategoryValue: (state, action) => {
+      state.categoryValue = action.payload;
+    },
   },
 });
 
-export const { changeSearchKey, updateListCar, getLocation, changeIsLoading, updateCarDetail } =
-  carSlice.actions;
+export const {
+  changeSearchKey,
+  updateListCar,
+  getLocation,
+  changeIsLoading,
+  updateCarDetail,
+  updateCategoryValue,
+} = carSlice.actions;
 export default carSlice.reducer;
 
 // ******************************** ACTION THUNK **************************** //
@@ -60,17 +65,7 @@ export const getListCarsApi = (searchKey: string): AppThunk => {
       dispatch(changeIsLoading(true));
       const listCar = await carServices.getSearchCar(searchKey);
       const listAll = listCar.data;
-      const listPopularCar = listCar.data.filter((car: carType) => car.typeBusiness === 'popular');
-      const listRecommendCar = listCar.data.filter(
-        (car: carType) => car.typeBusiness === 'recommend',
-      );
-      dispatch(
-        updateListCar({
-          listPopularCar,
-          listRecommendCar,
-          listAll,
-        }),
-      );
+      dispatch(updateListCar(listAll));
       dispatch(changeIsLoading(false));
     } catch (_error) {
       // console.log(error)
@@ -81,8 +76,10 @@ export const getListCarsApi = (searchKey: string): AppThunk => {
 export const getListLocation = (): AppThunk => {
   return async (dispatch) => {
     try {
+      dispatch(changeIsLoading(true));
       const location = await carServices.getLocationList();
       dispatch(getLocation(location.data));
+      dispatch(changeIsLoading(false));
     } catch (_error) {
       // console.log(error)
     }
@@ -119,9 +116,43 @@ export const updateCarDetailThunk = (carId: string): AppThunk => {
   };
 };
 
+export const getCategoryData = (): AppThunk => {
+  return async (dispatch) => {
+    const data = await carServices.getCategory();
+    dispatch(
+      updateCategoryValue([
+        ...data.data,
+        { name: 'Price', value: 0, section: 'PRICE', isSelected: true },
+      ]),
+    );
+  };
+};
+
+export const updateUpdateCategoryValue = (
+  isSelected: boolean,
+  itemCheckBox: categoryType,
+): AppThunk => {
+  return async (dispatch, getState) => {
+    const { carReducer } = getState();
+    const itemIndex = carReducer.categoryValue.findIndex((item) => {
+      return item.name.trim() === itemCheckBox.name.trim();
+    });
+    const valueUpdate = [...carReducer.categoryValue];
+    if (itemIndex !== -1) {
+      valueUpdate[itemIndex] =
+        itemCheckBox.name !== 'Price'
+          ? { ...valueUpdate[itemIndex], isSelected: isSelected }
+          : { ...valueUpdate[itemIndex], value: itemCheckBox.value };
+      dispatch(updateCategoryValue(valueUpdate));
+    }
+  };
+};
+
 export const carActionThunk = {
   getListCarsApi,
   getListLocation,
   changeIsLikeStatus,
   updateCarDetailThunk,
+  getCategoryData,
+  updateUpdateCategoryValue,
 };

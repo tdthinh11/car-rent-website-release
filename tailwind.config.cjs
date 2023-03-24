@@ -26,10 +26,12 @@ module.exports = {
         jakarta: "'Plus Jakarta Sans', sans-serif"
       },
       borderColor: {
-        light: 'rgba(195, 212, 233, 0.4)'
+        light: 'rgba(195, 212, 233, 0.4)',
+        grey: '1px solid #90A3BF'
       },
       screens: {
-        s375: '375px'
+        s375: '375px',
+        s1440: '1440px'
       },
       lineHeight: {
         '100': '100%',

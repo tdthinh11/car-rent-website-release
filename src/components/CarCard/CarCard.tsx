@@ -3,12 +3,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Gas from '@/assets/icons/Gas';
-import { Heard } from '@/assets/icons/Heard';
+import { Heart } from '@/assets/icons/Heart';
 import People from '@/assets/icons/People';
 import Steering from '@/assets/icons/Steering';
 import Button from '@/components/Button/Button';
 
-type CarProps = {
+type CarCardProps = {
   cardType?: 'vertical' | 'horizontal';
   carName: string;
   carType: string;
@@ -19,7 +19,7 @@ type CarProps = {
   isLiked?: boolean;
   imgSm?: string;
   imgLg?: string;
-  onclick?: React.MouseEventHandler<HTMLDivElement> | undefined;
+  onClickLike?: React.MouseEventHandler<HTMLDivElement> | undefined;
   carId: string;
   steering: string;
 };
@@ -43,14 +43,14 @@ export const CarCard = ({
   isLiked = false,
   imgSm,
   imgLg,
-  onclick,
+  onClickLike,
   carId,
   steering,
-}: CarProps) => {
+}: CarCardProps) => {
   return (
     <div className="relative">
-      <div className="absolute top-4 right-4 hover:cursor-pointer" onClick={onclick}>
-        <Heard
+      <div className="absolute top-4 right-4 hover:cursor-pointer" onClick={onClickLike}>
+        <Heart
           className={`fill-current ${
             isLiked ? 'text-red-500' : 'stroke-grey stroke-[1.5] text-transparent'
           }`}

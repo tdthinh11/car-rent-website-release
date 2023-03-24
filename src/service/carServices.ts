@@ -1,8 +1,16 @@
 import { AxiosRequestConfig } from 'axios';
 
-import { carType, listAllCar } from '@/assets/data/cars';
-import { listLocation } from '@/assets/data/selection';
-import { GET_LOCATION, GET_POPULAR_CARS, GET_RECOMMEND_CARS, SEARCH } from '@/utils/contain';
+import { carType, listAllCar } from '@/model/cars';
+import { listLocation } from '@/model/selection';
+import {
+  CATEGORY,
+  CapacityCategory,
+  GET_LOCATION,
+  GET_POPULAR_CARS,
+  GET_RECOMMEND_CARS,
+  SEARCH,
+  TypeCategory,
+} from '@/utils/constant';
 import { getUrl } from '@/utils/helper';
 
 import api from './axios';
@@ -55,11 +63,46 @@ mock.onGet(getUrl(GET_LOCATION)).reply(() => {
   return [200, [...listLocation]];
 });
 
+export type categoryType = {
+  name: string;
+  value: number;
+  isSelected: boolean;
+  section: 'TYPE' | 'CAPACITY' | 'PRICE';
+};
+
+mock.onGet(getUrl(CATEGORY)).reply(() => {
+  const capacityType: categoryType[] = [];
+  const listType: categoryType[] = [];
+  Object.keys(TypeCategory).forEach((item) => {
+    listType.push({
+      name: item,
+      value: listAllCar.filter((car) => car.type.toLowerCase() === item.toLowerCase()).length,
+      isSelected: false,
+      section: 'TYPE',
+    });
+  });
+
+  Object.keys(CapacityCategory).forEach((item) => {
+    capacityType.push({
+      name: item,
+      value: listAllCar.filter(
+        (car) =>
+          car.capacity.toString() === CapacityCategory[item as keyof typeof CapacityCategory],
+      ).length,
+      isSelected: false,
+      section: 'CAPACITY',
+    });
+  });
+
+  return [200, [...listType, ...capacityType]];
+});
+
 class CarServices {
   getPopularCars = (id = '') => api.get(`${GET_POPULAR_CARS}/${id}`);
   getRecommendCars = (id = '') => api.get(`${GET_RECOMMEND_CARS}/${id}`);
   getSearchCar = (search = '') => api.get(`${SEARCH}?search=${search}`);
   getLocationList = () => api.get(GET_LOCATION);
+  getCategory = () => api.get(`${CATEGORY}`);
 }
 
 export const carServices = new CarServices();
