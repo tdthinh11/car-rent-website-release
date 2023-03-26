@@ -6,10 +6,10 @@ import { carType } from '@/model/cars';
 
 type RecommendCarProps = {
   listRecommendCars: carType[];
-  onClick: (car: carType) => void | React.MouseEventHandler<HTMLDivElement> | undefined;
+  onClickLike: (car: carType) => void | React.MouseEventHandler<HTMLDivElement> | undefined;
   isLoading?: boolean;
 };
-const RecommendCar = ({ listRecommendCars, onClick, isLoading }: RecommendCarProps) => {
+const RecommendCar = ({ listRecommendCars, onClickLike, isLoading }: RecommendCarProps) => {
   const [isViewAll, setIsViewAll] = useState<boolean>(false);
   const [isLoadingAll, setIsLoadingAll] = useState<boolean>(false);
   return (
@@ -41,7 +41,7 @@ const RecommendCar = ({ listRecommendCars, onClick, isLoading }: RecommendCarPro
                         isLiked={car.isLiked}
                         imgSm={car.imgSm}
                         imgLg={car.imgLg}
-                        onClickLike={() => onClick(car)}
+                        onClickLike={() => onClickLike(car)}
                         cardType="horizontal"
                         carId={car.id}
                         steering={car.steering}
@@ -57,7 +57,7 @@ const RecommendCar = ({ listRecommendCars, onClick, isLoading }: RecommendCarPro
                         isLiked={car.isLiked}
                         imgSm={car.imgSm}
                         imgLg={car.imgLg}
-                        onClickLike={() => onClick(car)}
+                        onClickLike={() => onClickLike(car)}
                         cardType="vertical"
                         carId={car.id}
                         steering={car.steering}
@@ -83,7 +83,7 @@ const RecommendCar = ({ listRecommendCars, onClick, isLoading }: RecommendCarPro
                         isLiked={car.isLiked}
                         imgSm={car.imgSm}
                         imgLg={car.imgLg}
-                        onClickLike={() => onClick(car)}
+                        onClickLike={() => onClickLike(car)}
                         cardType="horizontal"
                         carId={car.id}
                         steering={car.steering}
@@ -99,7 +99,7 @@ const RecommendCar = ({ listRecommendCars, onClick, isLoading }: RecommendCarPro
                         isLiked={car.isLiked}
                         imgSm={car.imgSm}
                         imgLg={car.imgLg}
-                        onClickLike={() => onClick(car)}
+                        onClickLike={() => onClickLike(car)}
                         cardType="vertical"
                         carId={car.id}
                         steering={car.steering}

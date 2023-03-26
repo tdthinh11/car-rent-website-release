@@ -5,11 +5,16 @@ import { carType } from '@/model/cars';
 
 type PopularProps = {
   listPopularCars: carType[];
-  onClick: (car: carType) => void | React.MouseEventHandler<HTMLDivElement> | undefined;
+  onClickLike: (car: carType) => void | React.MouseEventHandler<HTMLDivElement> | undefined;
   isLoading?: boolean;
   title?: string;
 };
-const PopularCar = ({ listPopularCars, onClick, isLoading, title = 'Popular' }: PopularProps) => {
+const PopularCar = ({
+  listPopularCars,
+  onClickLike,
+  isLoading,
+  title = 'Popular',
+}: PopularProps) => {
   const [isViewAll, setIsViewAll] = useState<boolean>(false);
   const [isLoadingView, setIsLoading] = useState<boolean>(false);
   return (
@@ -51,7 +56,7 @@ const PopularCar = ({ listPopularCars, onClick, isLoading, title = 'Popular' }: 
                     isLiked={car.isLiked}
                     imgSm={car.imgSm}
                     imgLg={car.imgLg}
-                    onClickLike={() => onClick(car)}
+                    onClickLike={() => onClickLike(car)}
                     carId={car.id}
                     steering={car.steering}
                   />
@@ -80,7 +85,7 @@ const PopularCar = ({ listPopularCars, onClick, isLoading, title = 'Popular' }: 
                     isLiked={car.isLiked}
                     imgSm={car.imgSm}
                     imgLg={car.imgLg}
-                    onClickLike={() => onClick(car)}
+                    onClickLike={() => onClickLike(car)}
                     carId={car.id}
                     steering={car.steering}
                   />

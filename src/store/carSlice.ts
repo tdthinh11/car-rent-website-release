@@ -7,7 +7,7 @@ import { AppThunk } from './store';
 
 export type carReducerType = {
   searchKey: string;
-  listAll: [];
+  listAll: carType[];
   locations: [];
   isLoading: boolean;
   carDetail: carType | null;
@@ -73,6 +73,27 @@ export const getListCarsApi = (searchKey: string): AppThunk => {
   };
 };
 
+export const filterByCategory = (filterQuery = ''): AppThunk => {
+  return async (dispatch, getState) => {
+    const { carReducer } = getState();
+    const listCar = await carServices.getSearchCar(carReducer.searchKey);
+    let data = [];
+    if (filterQuery) {
+      const queryObject = Object.fromEntries([...new URLSearchParams(filterQuery)]);
+      data = listCar.data.filter((item: carType) => {
+        return Object.entries(queryObject).find((listItemQuery) => {
+          if (item.type.toLowerCase() === listItemQuery[0].toLowerCase()) {
+            return item;
+          }
+        });
+      });
+    } else {
+      data = [...listCar.data];
+    }
+    dispatch(updateListCar(data));
+  };
+};
+
 export const getListLocation = (): AppThunk => {
   return async (dispatch) => {
     try {
@@ -93,17 +114,7 @@ export const changeIsLikeStatus = (car: carType): AppThunk => {
     if (index != -1) {
       const listAllUpdate: carType[] = [...carReducer.listAll];
       listAllUpdate[index] = { ...car, isLiked: !car.isLiked };
-      const listPopularCar = listAllUpdate.filter((car: carType) => car.typeBusiness === 'popular');
-      const listRecommendCar = listAllUpdate.filter(
-        (car: carType) => car.typeBusiness === 'recommend',
-      );
-      dispatch(
-        updateListCar({
-          listAll: listAllUpdate,
-          listPopularCar: listPopularCar,
-          listRecommendCar: listRecommendCar,
-        }),
-      );
+      dispatch(updateListCar(listAllUpdate));
     }
   };
 };
@@ -128,10 +139,7 @@ export const getCategoryData = (): AppThunk => {
   };
 };
 
-export const updateUpdateCategoryValue = (
-  isSelected: boolean,
-  itemCheckBox: categoryType,
-): AppThunk => {
+export const changeCategoryValue = (isSelected: boolean, itemCheckBox: categoryType): AppThunk => {
   return async (dispatch, getState) => {
     const { carReducer } = getState();
     const itemIndex = carReducer.categoryValue.findIndex((item) => {
@@ -154,5 +162,6 @@ export const carActionThunk = {
   changeIsLikeStatus,
   updateCarDetailThunk,
   getCategoryData,
-  updateUpdateCategoryValue,
+  changeCategoryValue,
+  filterByCategory,
 };

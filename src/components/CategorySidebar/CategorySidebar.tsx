@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import CheckBox from '@/components/CheckBox/CheckBox';
 import Slider from '@/components/Slider/Slider';
@@ -14,17 +15,31 @@ type CategorySidebarType = {
 
 export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
   const dispatch = useAppDispatch();
-  const { categoryValue } = useAppSelector((state) => state.carReducer);
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { categoryValue, searchKey } = useAppSelector((state) => state.carReducer);
 
   useEffect(() => {
     dispatch(carActionThunk.getListLocation());
+    dispatch(carActionThunk.getCategoryData());
     return () => {
       dispatch(toggleIsShow('reset'));
     };
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(carActionThunk.filterByCategory(searchParams.toString()));
+  }, [dispatch, navigate, searchParams, searchKey]);
+
   const onChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>, itemCheckBox: categoryType) => {
-    dispatch(carActionThunk.updateUpdateCategoryValue(e.target.checked, itemCheckBox));
+    const queryUpdate = Object.entries({
+      ...Object.fromEntries([...searchParams]),
+      [itemCheckBox.name]: `${e.currentTarget.checked}`,
+    }).filter((item) => {
+      return item[1] === 'true';
+    });
+    navigate({ search: '?' + new URLSearchParams(queryUpdate).toString() });
+    dispatch(carActionThunk.changeCategoryValue(e.target.checked, itemCheckBox));
   };
 
   const onChangeSlider = (value: number) => {
@@ -34,7 +49,16 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
       isSelected: true,
       value: value,
     };
-    dispatch(carActionThunk.updateUpdateCategoryValue(true, pricePayload));
+
+    navigate({
+      search:
+        '?' +
+        new URLSearchParams({
+          ...Object.fromEntries([...searchParams]),
+          price: `${value}`,
+        }).toString(),
+    });
+    dispatch(carActionThunk.changeCategoryValue(true, pricePayload));
   };
 
   return (
@@ -197,5 +221,3 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
     </div>
   );
 };
-
-// categoryValue.find(item => item.section === "PRICE")?.value

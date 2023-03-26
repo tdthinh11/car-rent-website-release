@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { Popover } from '@headlessui/react';
@@ -8,6 +9,7 @@ import Menu from '@/assets/icons/Menu';
 import { Notification } from '@/assets/icons/Notification';
 import { Setting } from '@/assets/icons/Setting';
 import User from '@/assets/images/user.png';
+import useDebounce from '@/hooks/useDebounce';
 import { carActionThunk, changeSearchKey } from '@/store/carSlice';
 import { useAppDispatch } from '@/store/hook';
 
@@ -18,19 +20,17 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const params = useLocation();
   const [searchText, setSearchText] = useState<string>('');
-  const debounceRef = useRef<NodeJS.Timeout>();
-  useEffect(() => {
-    dispatch(carActionThunk.getCategoryData());
-    debounceRef.current ?? clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => {
-      dispatch(changeSearchKey(searchText));
-    }, 300);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchText]);
-  // Debounce search
+  const debouncedValue = useDebounce<string>(searchText);
+
   const handleChange: React.ChangeEventHandler<HTMLInputElement> | undefined = (event) => {
     setSearchText(event.target.value);
   };
+
+  useEffect(() => {
+    dispatch(carActionThunk.getCategoryData());
+    dispatch(changeSearchKey(searchText));
+  }, [dispatch, debouncedValue]);
+
   return (
     <div className="bg-white">
       <div className="wrapper py-8 px-6 md:py-10 md:pl-16 md:pr-8">

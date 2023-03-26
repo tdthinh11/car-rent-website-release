@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import CarPlatform2 from '@/assets/images/CarPlatform2.png';
-import CarPlatform from '@/assets/images/CarPlatform.png';
+import Ads1 from '@/assets/images/AdsOne.png';
+import Ads2 from '@/assets/images/AdsTwo.png';
 import PickDrop, { IPickDropValue } from '@/components/PickDrop/PickDrop';
 import PopularCar from '@/components/PopularCar/PopularCar';
 import RecommendCar from '@/components/RecommendCar/RecommendCar';
@@ -25,7 +25,6 @@ const Home = () => {
   const [dropOffValue, setDropOffValue] = useState<IPickDropValue>(initPickDropValue);
   const [dropChecked, setDropChecked] = useState<boolean>(false);
   const [pickChecked, setPickChecked] = useState<boolean>(false);
-
   const { searchKey, listAll, locations, isLoading } = useAppSelector((state) => state.carReducer);
   const dispatch = useAppDispatch();
 
@@ -49,7 +48,7 @@ const Home = () => {
           <div className="shrink-1 grow basis-0">
             <AdsCard
               classNames="bg-secondary"
-              bgUrl={CarPlatform}
+              bgUrl={Ads1}
               btnVariant="primary"
               title="The Best Platform for Car Rental"
               description="Ease of doing a car rental safely and reliably. Of course at a low price."
@@ -59,7 +58,7 @@ const Home = () => {
           <div className="md:shrink-1 hidden md:block md:grow md:basis-0">
             <AdsCard
               classNames="bg-primary"
-              bgUrl={CarPlatform2}
+              bgUrl={Ads2}
               btnVariant="secondary"
               title="Easy way to rent a car at a low price"
               description="Providing cheap car rental services and safe and comfortable facilities."
@@ -98,15 +97,15 @@ const Home = () => {
         </div>
         <div className="mt-8">
           <PopularCar
-            listPopularCars={listAll.filter((car: carType) => car.typeBusiness === 'popular')}
-            onClick={changeStatusIsLiked}
+            listPopularCars={listAll.filter((car) => car.typeBusiness === 'popular')}
+            onClickLike={changeStatusIsLiked}
             isLoading={isLoading}
           />
         </div>
         <div className="mt-8">
           <RecommendCar
-            listRecommendCars={listAll.filter((car: carType) => car.typeBusiness === 'recommend')}
-            onClick={changeStatusIsLiked}
+            listRecommendCars={listAll.filter((car) => car.typeBusiness === 'recommend')}
+            onClickLike={changeStatusIsLiked}
             isLoading={isLoading}
           />
         </div>

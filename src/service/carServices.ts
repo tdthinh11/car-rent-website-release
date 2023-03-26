@@ -2,41 +2,11 @@ import { AxiosRequestConfig } from 'axios';
 
 import { carType, listAllCar } from '@/model/cars';
 import { listLocation } from '@/model/selection';
-import {
-  CATEGORY,
-  CapacityCategory,
-  GET_LOCATION,
-  GET_POPULAR_CARS,
-  GET_RECOMMEND_CARS,
-  SEARCH,
-  TypeCategory,
-} from '@/utils/constant';
+import { CATEGORY, CapacityCategory, GET_LOCATION, SEARCH, TypeCategory } from '@/utils/constant';
 import { getUrl } from '@/utils/helper';
 
 import api from './axios';
 import mock from './mock-adapter';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-mock.onGet(getUrl(GET_POPULAR_CARS)).reply((config: AxiosRequestConfig<any>) => {
-  const id = config?.url?.split('/')[config?.url?.split('/')?.length - 1];
-  if (!id) {
-    const listPopular = listAllCar.filter((car: carType) => car.typeBusiness === 'popular');
-    return [200, listPopular];
-  } else {
-    return [200, listAllCar.find((car: carType) => car.id === id)];
-  }
-});
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-mock.onGet(getUrl(GET_RECOMMEND_CARS)).reply((config: AxiosRequestConfig<any> | undefined) => {
-  const id = config?.url?.split('/')[config?.url?.split('/')?.length - 1];
-  if (!id) {
-    const listPopular = listAllCar.filter((car: carType) => car.typeBusiness === 'recommend');
-    return [200, listPopular];
-  } else {
-    return [200, listAllCar.find((car: carType) => car.id === id)];
-  }
-});
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 mock.onGet(getUrl(SEARCH)).reply((config: AxiosRequestConfig<any> | undefined) => {
@@ -98,8 +68,6 @@ mock.onGet(getUrl(CATEGORY)).reply(() => {
 });
 
 class CarServices {
-  getPopularCars = (id = '') => api.get(`${GET_POPULAR_CARS}/${id}`);
-  getRecommendCars = (id = '') => api.get(`${GET_RECOMMEND_CARS}/${id}`);
   getSearchCar = (search = '') => api.get(`${SEARCH}?search=${search}`);
   getLocationList = () => api.get(GET_LOCATION);
   getCategory = () => api.get(`${CATEGORY}`);

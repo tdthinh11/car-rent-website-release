@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Filter } from '@/assets/icons/Filter';
 import { SearchIcon } from '@/assets/icons/SearchIcon';
@@ -18,6 +18,7 @@ export const Search = ({ placeHolder, value, ...props }: SearchType) => {
   const { isShowDrawer } = useAppSelector((state) => state.drawerSlice);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
   return (
     <div className="md:border-light flex flex-wrap items-center justify-between gap-4 md:rounded-[70px] md:border md:py-3 md:px-6 lg:w-[30rem]">
@@ -36,7 +37,7 @@ export const Search = ({ placeHolder, value, ...props }: SearchType) => {
       <div
         className="filter-category border-light flex items-center rounded-[10px] border py-3 px-[14px] hover:cursor-pointer md:border-0 md:p-0"
         onClick={() => {
-          navigate('/category');
+          !location.pathname.includes('/category') && navigate('/category');
           dispatch(toggleIsShow('active'));
         }}
       >

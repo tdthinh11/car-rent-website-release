@@ -219,7 +219,7 @@ export const Detail = () => {
       <div className="mt-8">
         <PopularCar
           listPopularCars={listAll.filter((car: carType) => car.typeBusiness === 'popular')}
-          onClick={changeStatusIsLiked}
+          onClickLike={changeStatusIsLiked}
           isLoading={isLoading}
         />
       </div>
@@ -227,7 +227,7 @@ export const Detail = () => {
         <PopularCar
           title="Recommend"
           listPopularCars={listAll.filter((car: carType) => car.typeBusiness === 'recommend')}
-          onClick={changeStatusIsLiked}
+          onClickLike={changeStatusIsLiked}
           isLoading={isLoading}
         />
       </div>

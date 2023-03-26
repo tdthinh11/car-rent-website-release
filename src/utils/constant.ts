@@ -20,8 +20,6 @@ export enum CapacityCategory {
   Eight = '8',
 }
 
-export const GET_POPULAR_CARS = 'list-popular-cars';
-export const GET_RECOMMEND_CARS = 'list-recommend-cars';
 export const GET_LOCATION = 'list-location';
 export const SEARCH = 'search';
 export const CATEGORY = 'category';

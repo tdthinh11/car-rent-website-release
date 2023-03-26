@@ -1,3 +1,4 @@
+import Ads2 from '@/assets/images/Ads2.png';
 import LgAllNewRush from '@/assets/images/Car/LgAllNewRush.png';
 import LgAllNewTerios from '@/assets/images/Car/LgAllNewTerios.png';
 import LgCRV from '@/assets/images/Car/LgCR-V.png';
@@ -14,7 +15,6 @@ import SmKoenigsegg from '@/assets/images/Car/SmKoenigsegg.png';
 import Look1 from '@/assets/images/Car/look1.png';
 import Look2 from '@/assets/images/Car/look2.png';
 import Look3 from '@/assets/images/Car/look3.png';
-import CarPlatform2 from '@/assets/images/CarPlatform2.png';
 import User1 from '@/assets/images/user/user1.png';
 import User2 from '@/assets/images/user/user2.png';
 import User3 from '@/assets/images/user/user3.png';
@@ -41,7 +41,7 @@ export type carType = {
   id: string;
   name: string;
   typeBusiness: 'popular' | 'recommend';
-  type: 'sport' | 'sedan' | 'suv' | 'hatchback';
+  type: 'Sport' | 'Sedan' | 'SUV' | 'Hatchback';
   imgSm?: string;
   imgLg?: string;
   gas: string;
@@ -61,7 +61,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'popular',
     id: '1',
     name: 'Koenigsegg',
-    type: 'sport',
+    type: 'Sport',
     imgSm: SmKoenigsegg,
     imgLg: LgKoenigsegg,
     gas: '90',
@@ -123,7 +123,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -131,7 +131,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'popular',
     id: '2',
     name: 'Nissan GT - R',
-    type: 'sport',
+    type: 'Sport',
     imgSm: LgNissanGTR,
     imgLg: LgNissanGTR,
     gas: '80',
@@ -183,7 +183,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -191,7 +191,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'popular',
     id: '3',
     name: 'Rolls - Royce',
-    type: 'sedan',
+    type: 'Sedan',
     imgSm: LgRollsRuyce,
     imgLg: LgRollsRuyce,
     gas: '70',
@@ -243,7 +243,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -251,11 +251,11 @@ export const listAllCar: carType[] = [
     typeBusiness: 'popular',
     id: '4',
     name: 'Nissan GT - R',
-    type: 'sport',
+    type: 'Sport',
     imgSm: LgNissanGTR,
     imgLg: LgNissanGTR,
     gas: '80',
-    capacity: 80,
+    capacity: 8,
     price: 80,
     isLiked: false,
     steering: 'Manual',
@@ -303,7 +303,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -311,7 +311,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'popular',
     id: '5',
     name: 'Rolls - Royce',
-    type: 'sedan',
+    type: 'Sedan',
     imgSm: LgRollsRuyce,
     imgLg: LgRollsRuyce,
     gas: '70',
@@ -363,7 +363,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -371,7 +371,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'popular',
     id: '6',
     name: 'Koenigsegg',
-    type: 'sport',
+    type: 'Sport',
     imgSm: SmKoenigsegg,
     imgLg: LgKoenigsegg,
     gas: '90',
@@ -423,7 +423,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -431,7 +431,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'recommend',
     id: '100',
     name: 'All New Rush',
-    type: 'sport',
+    type: 'Sport',
     imgSm: SmAllNewRush,
     imgLg: LgAllNewRush,
     gas: '70',
@@ -483,7 +483,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -491,7 +491,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'recommend',
     id: '101',
     name: 'CR - V',
-    type: 'sport',
+    type: 'Sport',
     imgSm: SmCRV,
     imgLg: LgCRV,
     gas: '80',
@@ -543,7 +543,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -551,7 +551,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'recommend',
     id: '102',
     name: 'All New Terios',
-    type: 'suv',
+    type: 'SUV',
     imgSm: SmKoenigsegg,
     imgLg: LgAllNewTerios,
     gas: '90',
@@ -603,7 +603,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -611,7 +611,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'recommend',
     id: '103',
     name: 'CR - V',
-    type: 'sport',
+    type: 'Sport',
     imgSm: SmCRV,
     imgLg: LgCRV,
     gas: '80',
@@ -663,7 +663,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -671,7 +671,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'recommend',
     id: '104',
     name: 'MG ZX Exclusice',
-    type: 'hatchback',
+    type: 'Hatchback',
     imgSm: SmAllNewRush,
     imgLg: LgMGZXExclusice,
     gas: '70',
@@ -723,7 +723,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -731,7 +731,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'recommend',
     id: '105',
     name: 'New MG ZS',
-    type: 'suv',
+    type: 'SUV',
     imgSm: SmKoenigsegg,
     imgLg: LgNewMGZS,
     gas: '80',
@@ -783,7 +783,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -791,7 +791,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'recommend',
     id: '106',
     name: 'MG ZX Excite',
-    type: 'hatchback',
+    type: 'Hatchback',
     imgSm: SmAllNewRush,
     imgLg: LgCRV,
     gas: '90',
@@ -843,7 +843,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -851,7 +851,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'recommend',
     id: '107',
     name: 'New MG ZS',
-    type: 'suv',
+    type: 'SUV',
     imgSm: SmAllNewRush,
     imgLg: LgMGZS,
     gas: '108',
@@ -903,7 +903,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -911,7 +911,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'recommend',
     id: '109',
     name: 'New MG ZS',
-    type: 'suv',
+    type: 'SUV',
     imgSm: SmKoenigsegg,
     imgLg: LgNewMGZS,
     gas: '80',
@@ -963,7 +963,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -971,7 +971,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'recommend',
     id: '110',
     name: 'MG ZX Excite',
-    type: 'hatchback',
+    type: 'Hatchback',
     imgSm: SmAllNewRush,
     imgLg: LgCRV,
     gas: '90',
@@ -1023,7 +1023,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
@@ -1031,7 +1031,7 @@ export const listAllCar: carType[] = [
     typeBusiness: 'recommend',
     id: '11',
     name: 'New MG ZS',
-    type: 'suv',
+    type: 'SUV',
     imgSm: SmAllNewRush,
     imgLg: LgMGZXExcite,
     gas: '80',
@@ -1083,7 +1083,7 @@ export const listAllCar: carType[] = [
       },
     ],
     carouselDetail: {
-      showImg: [CarPlatform2, Look2, Look3],
+      showImg: [Ads2, Look2, Look3],
       btnImg: [Look1, Look2, Look3],
     },
   },
