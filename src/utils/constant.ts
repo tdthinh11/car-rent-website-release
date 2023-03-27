@@ -23,3 +23,4 @@ export enum CapacityCategory {
 export const GET_LOCATION = 'list-location';
 export const SEARCH = 'search';
 export const CATEGORY = 'category';
+export const MAX_PRICE = 100;

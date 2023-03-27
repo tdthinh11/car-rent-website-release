@@ -8,6 +8,13 @@ import { getUrl } from '@/utils/helper';
 import api from './axios';
 import mock from './mock-adapter';
 
+export type categoryType = {
+  name: string;
+  value: number;
+  isSelected: boolean;
+  section: 'TYPE' | 'CAPACITY' | 'PRICE';
+};
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 mock.onGet(getUrl(SEARCH)).reply((config: AxiosRequestConfig<any> | undefined) => {
   const listKeyToSearch = ['name', 'type', 'gas', 'capacity', 'price'];
@@ -32,13 +39,6 @@ mock.onGet(getUrl(SEARCH)).reply((config: AxiosRequestConfig<any> | undefined) =
 mock.onGet(getUrl(GET_LOCATION)).reply(() => {
   return [200, [...listLocation]];
 });
-
-export type categoryType = {
-  name: string;
-  value: number;
-  isSelected: boolean;
-  section: 'TYPE' | 'CAPACITY' | 'PRICE';
-};
 
 mock.onGet(getUrl(CATEGORY)).reply(() => {
   const capacityType: categoryType[] = [];

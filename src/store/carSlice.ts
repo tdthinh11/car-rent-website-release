@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { carType } from '@/model/cars';
 import { carServices, categoryType } from '@/service/carServices';
+import { CapacityCategory, MAX_PRICE, TypeCategory } from '@/utils/constant';
 
 import { AppThunk } from './store';
 
@@ -78,14 +79,60 @@ export const filterByCategory = (filterQuery = ''): AppThunk => {
     const { carReducer } = getState();
     const listCar = await carServices.getSearchCar(carReducer.searchKey);
     let data = [];
+
+    // Group of filter Sport=true&SUV=true&Two=true&price=10
+    const queryObject = Object.fromEntries([...new URLSearchParams(filterQuery)]);
+    const groupType = Object.keys(TypeCategory).reduce((result, typeItem) => {
+      if (
+        Object.entries(queryObject).find((item) => item[0].toLowerCase() === typeItem.toLowerCase())
+      ) {
+        return { ...result, [typeItem]: queryObject[typeItem] };
+      }
+      return { ...result };
+    }, {});
+    const groupCapacity = Object.keys(CapacityCategory).reduce((result, typeItem) => {
+      if (
+        Object.entries(queryObject).find((item) => item[0].toLowerCase() === typeItem.toLowerCase())
+      ) {
+        return { ...result, [typeItem]: queryObject[typeItem] };
+      }
+      return { ...result };
+    }, {});
+    const groupPrice = Object.entries(queryObject).reduce(
+      (result, priceItem) => {
+        if (priceItem[0] === 'price') {
+          return { price: priceItem[1] };
+        }
+        return { ...result };
+      },
+      { price: `${MAX_PRICE}` },
+    );
+
     if (filterQuery) {
-      const queryObject = Object.fromEntries([...new URLSearchParams(filterQuery)]);
       data = listCar.data.filter((item: carType) => {
-        return Object.entries(queryObject).find((listItemQuery) => {
-          if (item.type.toLowerCase() === listItemQuery[0].toLowerCase()) {
-            return item;
-          }
-        });
+        return (
+          (Object.entries(groupType).length
+            ? Object.entries(groupType).find((listItemQuery) => {
+                return item.type.toLowerCase() === listItemQuery[0].toLowerCase();
+              })
+            : true) &&
+          (Object.entries(groupCapacity).length
+            ? Object.entries(groupCapacity).find((listItemQuery) => {
+                return (
+                  item.capacity.toString().toLowerCase() ===
+                  CapacityCategory[listItemQuery[0] as keyof typeof CapacityCategory]
+                );
+              })
+            : true) &&
+          (Object.entries(groupPrice).length
+            ? Object.entries(groupPrice).find((listItemQuery) => {
+                return (
+                  item.price < parseInt(listItemQuery[1]) ||
+                  item.priceWithoutDisCount < parseInt(listItemQuery[1])
+                );
+              })
+            : true)
+        );
       });
     } else {
       data = [...listCar.data];

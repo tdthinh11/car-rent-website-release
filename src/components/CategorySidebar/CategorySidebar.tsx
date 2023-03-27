@@ -7,7 +7,7 @@ import { categoryType } from '@/service/carServices';
 import { carActionThunk } from '@/store/carSlice';
 import { toggleIsShow } from '@/store/drawerSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
-import { CapacityCategory } from '@/utils/constant';
+import { CapacityCategory, MAX_PRICE } from '@/utils/constant';
 
 type CategorySidebarType = {
   variant?: 'lg' | 'sm';
@@ -22,16 +22,19 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
   useEffect(() => {
     dispatch(carActionThunk.getListLocation());
     dispatch(carActionThunk.getCategoryData());
+    navigate({ search: '' });
+
     return () => {
       dispatch(toggleIsShow('reset'));
     };
-  }, [dispatch]);
+  }, [dispatch, navigate]);
 
   useEffect(() => {
     dispatch(carActionThunk.filterByCategory(searchParams.toString()));
-  }, [dispatch, navigate, searchParams, searchKey]);
+  }, [dispatch, navigate, searchParams, searchKey, categoryValue]);
 
   const onChangeCheckbox = (e: React.ChangeEvent<HTMLInputElement>, itemCheckBox: categoryType) => {
+    // Remove query with item has value is false
     const queryUpdate = Object.entries({
       ...Object.fromEntries([...searchParams]),
       [itemCheckBox.name]: `${e.currentTarget.checked}`,
@@ -129,13 +132,13 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
             <div>
               <Slider
                 id="price-slider"
-                max={100}
+                max={MAX_PRICE}
                 step={10}
                 value={categoryValue.find((item) => item.section === 'PRICE')?.value}
                 onInput={onChangeSlider}
               />
               <span className="leading-150 text-second mt-4 text-xl font-semibold tracking-tight">
-                Max.&#36;100.00
+                Max.&#36;{`${MAX_PRICE}`}.00
               </span>
             </div>
           </div>
@@ -206,13 +209,13 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
             <div>
               <Slider
                 id="price-slider"
-                max={100}
+                max={MAX_PRICE}
                 step={10}
                 value={categoryValue.find((item) => item.section === 'PRICE')?.value}
                 onInput={onChangeSlider}
               />
               <span className="leading-150 text-second mt-4 text-xl font-semibold tracking-tight">
-                Max.&#36;100.00
+                Max.&#36;{`${MAX_PRICE}`}.00
               </span>
             </div>
           </div>
