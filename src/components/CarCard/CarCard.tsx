@@ -87,9 +87,11 @@ export const CarCard = ({
           <h1 className="text-black-2 font-bold leading-5 tracking-tight">
             &#36;{price}/<span className="text-grey"> day</span>
           </h1>
-          <Button variant="primary" className="py-[10px] px-[16px]">
-            Rental Now
-          </Button>
+          <Link to={`/rental/${carId}`}>
+            <Button variant="primary" className="py-[10px] px-[16px]">
+              Rental Now
+            </Button>
+          </Link>
         </div>
       </Link>
     </div>

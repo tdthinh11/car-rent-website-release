@@ -34,9 +34,13 @@ const Header = () => {
   return (
     <div className="bg-white">
       <div className="wrapper py-8 px-6 md:py-10 md:pl-16 md:pr-8">
-        <div className="mb-8 flex items-center justify-between md:mb-0">
+        <div
+          className={`flex items-center justify-between md:mb-0 ${
+            !params.pathname.includes('/rental/') ? 'mb-8' : 'mb-0'
+          }`}
+        >
           <div className="flex items-center">
-            {params.pathname !== '/' ? (
+            {params.pathname !== '/' && !params.pathname.includes('/rental/') ? (
               <div>
                 <div className="md:hidden">
                   <Popover className="relative flex items-center">
@@ -76,13 +80,15 @@ const Header = () => {
                 MORENT
               </Link>
             )}
-            <div className="hidden md:block">
-              <Search
-                placeHolder="Search something here"
-                value={searchText}
-                onChange={handleChange}
-              />
-            </div>
+            {!params.pathname.includes('/rental/') && (
+              <div className="hidden md:block">
+                <Search
+                  placeHolder="Search something here"
+                  value={searchText}
+                  onChange={handleChange}
+                />
+              </div>
+            )}
           </div>
           <div className="flex items-center gap-2 lg:gap-5">
             <div className="sm:border-light hidden h-11 w-11 p-3 hover:cursor-pointer sm:flex sm:items-center sm:justify-center sm:rounded-full sm:border">
@@ -122,21 +128,27 @@ const Header = () => {
             </Popover>
           </div>
         </div>
-        <div className="md:hidden ">
-          {params.pathname !== '/' ? (
-            <div className="mb-6">
-              <Link
-                to="/"
-                className="text-primary leading-150 mr-7 text-2xl font-bold hover:cursor-pointer md:text-3xl md:leading-[150%] md:tracking-tight lg:mr-16"
-              >
-                MORENT
-              </Link>
-            </div>
-          ) : (
-            ''
-          )}
-          <Search placeHolder="Search something here" value={searchText} onChange={handleChange} />
-        </div>
+        {!params.pathname.includes('/rental/') && (
+          <div className="md:hidden ">
+            {params.pathname !== '/' ? (
+              <div className="mb-6">
+                <Link
+                  to="/"
+                  className="text-primary leading-150 mr-7 text-2xl font-bold hover:cursor-pointer md:text-3xl md:leading-[150%] md:tracking-tight lg:mr-16"
+                >
+                  MORENT
+                </Link>
+              </div>
+            ) : (
+              ''
+            )}
+            <Search
+              placeHolder="Search something here"
+              value={searchText}
+              onChange={handleChange}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

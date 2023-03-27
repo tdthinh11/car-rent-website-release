@@ -1,0 +1,21 @@
+.payment-method input[type='checkbox'] ~ .checkbox-circle {
+  border: 1.5px solid #90a3bf;
+  background-color: transparent;
+}
+
+.payment-method input[type='checkbox']:checked ~ .checkbox-circle {
+  background-color: rgba(53, 99, 233, 0.3);
+  border: 1px solid transparent;
+}
+
+.payment-method input[type='checkbox'] ~ .checkbox-circle::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.payment-method input[type='checkbox']:checked ~ .checkbox-circle::after {
+  background-color: #3563e9;
+}

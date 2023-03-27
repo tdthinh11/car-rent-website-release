@@ -11,6 +11,7 @@ interface CheckBoxProps {
   type?: 'circle' | 'square';
   classLabel?: string;
   checked?: boolean;
+  name?: string;
 }
 
 const variantStyles = {
@@ -26,12 +27,13 @@ const CheckBox = ({
   checked,
   type = 'circle',
   classLabel = labelClassDefault,
+  name,
 }: CheckBoxProps) => {
   return (
     <label htmlFor={id} className="flex w-max items-center gap-2 hover:cursor-pointer">
       <input
         type="checkbox"
-        name={label}
+        name={name}
         id={id}
         checked={checked}
         onChange={onChange}

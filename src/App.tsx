@@ -11,6 +11,8 @@ import Home from '@/pages/Home/Home';
 import NotFound from '@/pages/NotFound/NotFound';
 import store from '@/store/store';
 
+import { Rental } from './pages/Rental/Rental';
+
 function App() {
   return (
     <HelmetProvider>
@@ -22,6 +24,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="detail/:carId" element={<Detail />} />
                 <Route path="category" element={<Category />} />
+                <Route path="rental/:carId" element={<Rental />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
