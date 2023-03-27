@@ -1,4 +1,4 @@
-import Ads2 from '@/assets/images/Ads2.png';
+import Ads2 from '@/assets/images/AdsTwo.png';
 import LgAllNewRush from '@/assets/images/Car/LgAllNewRush.png';
 import LgAllNewTerios from '@/assets/images/Car/LgAllNewTerios.png';
 import LgCRV from '@/assets/images/Car/LgCR-V.png';
@@ -41,7 +41,7 @@ export type carType = {
   id: string;
   name: string;
   typeBusiness: 'popular' | 'recommend';
-  type: 'Sport' | 'Sedan' | 'SUV' | 'Hatchback';
+  type: string;
   imgSm?: string;
   imgLg?: string;
   gas: string;
