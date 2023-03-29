@@ -9,7 +9,7 @@ interface IOptionSelection {
 }
 
 interface ISelection {
-  placeholder?: string;
+  placeholder: string;
   option: IOptionSelection[];
   label: string;
   id?: Path<IPayment>;

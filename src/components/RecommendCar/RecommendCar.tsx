@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Button from '@/components/Button/Button';
 import { CarCard } from '@/components/CarCard/CarCard';
@@ -12,11 +13,12 @@ type RecommendCarProps = {
 const RecommendCar = ({ listRecommendCars, onClickLike, isLoading }: RecommendCarProps) => {
   const [isViewAll, setIsViewAll] = useState<boolean>(false);
   const [isLoadingAll, setIsLoadingAll] = useState<boolean>(false);
+  const { t } = useTranslation();
   return (
     <div>
       <div className="flex justify-between">
         <h2 className="text-grey mb-5 text-sm font-semibold leading-[150%] tracking-tight sm:pl-4">
-          Recommendation Car
+          {t('common.recommend')}
         </h2>
       </div>
       {isLoading ? (

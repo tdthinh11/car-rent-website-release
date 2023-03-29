@@ -6,7 +6,7 @@ import './InputText.css';
 
 interface InputTextProps {
   id: Path<IPayment>;
-  label?: string;
+  label: string;
   placeholder: string;
   type?: 'text' | 'date' | 'time';
   classNames?: string;

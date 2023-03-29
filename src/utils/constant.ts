@@ -20,6 +20,11 @@ export enum CapacityCategory {
   Eight = '8',
 }
 
+export enum Language {
+  EN = 'en',
+  VN = 'vn',
+}
+
 export const GET_LOCATION = 'list-location';
 export const SEARCH = 'search';
 export const CATEGORY = 'category';

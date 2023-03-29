@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import * as yup from 'yup';
@@ -85,6 +86,7 @@ interface IRental {
 
 export const Rental = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -120,32 +122,32 @@ export const Rental = () => {
   const stepPayment: IRental[] = [
     {
       id: '1',
-      title: 'Billing Info',
-      description: 'Please enter your billing info',
+      title: t('rental.billingInfo.title'),
+      description: t('rental.billingInfo.subTitle'),
       children: (
         <BillingInfo {...data} updateFields={updateFields} register={register} errors={errors} />
       ),
     },
     {
       id: '2',
-      title: 'Rental Info',
-      description: 'Please select your rental date',
+      title: t('rental.rentalInfo.title'),
+      description: t('rental.billingInfo.subTitle'),
       children: (
         <RentalInfo {...data} updateFields={updateFields} register={register} errors={errors} />
       ),
     },
     {
       id: '3',
-      title: 'Payment Method',
-      description: 'Please enter your payment method',
+      title: t('rental.paymentMethod.title'),
+      description: t('rental.paymentMethod.subTitle'),
       children: (
         <PaymentMethod {...data} updateFields={updateFields} register={register} errors={errors} />
       ),
     },
     {
       id: '4',
-      title: 'Confirmation',
-      description: 'We are getting to the end. Just few clicks and your rental is ready!',
+      title: t('rental.confirmation.title'),
+      description: t('rental.confirmation.subTitle'),
       children: (
         <Confirmation
           {...data}

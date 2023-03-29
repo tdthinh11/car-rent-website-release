@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { CarCard } from '@/components/CarCard/CarCard';
 import { carType } from '@/model/cars';
@@ -9,19 +10,15 @@ type PopularProps = {
   isLoading?: boolean;
   title?: string;
 };
-const PopularCar = ({
-  listPopularCars,
-  onClickLike,
-  isLoading,
-  title = 'Popular',
-}: PopularProps) => {
+const PopularCar = ({ listPopularCars, onClickLike, isLoading, title }: PopularProps) => {
   const [isViewAll, setIsViewAll] = useState<boolean>(false);
   const [isLoadingView, setIsLoading] = useState<boolean>(false);
+  const { t } = useTranslation();
   return (
     <div>
       <div className="flex items-center justify-between">
         <h2 className="text-grey mb-5 text-sm font-semibold leading-[150%] tracking-tight sm:pl-4">
-          {title}
+          {title ? title : t('common.popular')}
         </h2>
         <button
           className="text-primary text-xs font-semibold leading-[15px]"
@@ -33,7 +30,7 @@ const PopularCar = ({
             }, 1000);
           }}
         >
-          {!isViewAll ? 'View All' : 'View less'}
+          {!isViewAll ? t('common.viewAll') : t('common.viewLess')}
         </button>
       </div>
       {isLoading ? (
@@ -64,7 +61,7 @@ const PopularCar = ({
               );
             })
           ) : (
-            <h3 className="grow text-center opacity-50">List of cars are empty</h3>
+            <h3 className="grow text-center opacity-50">{t('common.listCarEmpty')}</h3>
           )}
         </div>
       ) : (
@@ -93,7 +90,7 @@ const PopularCar = ({
               );
             })
           ) : (
-            <h3 className="grow text-center opacity-50">List of cars are empty</h3>
+            <h3 className="grow text-center opacity-50">{t('common.listCarEmpty')}</h3>
           )}
         </div>
       )}

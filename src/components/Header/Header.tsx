@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 
 import { Popover } from '@headlessui/react';
@@ -10,8 +11,10 @@ import { Notification } from '@/assets/icons/Notification';
 import { Setting } from '@/assets/icons/Setting';
 import User from '@/assets/images/user.png';
 import useDebounce from '@/hooks/useDebounce';
+import { useLanguage } from '@/hooks/useLanguage';
 import { carActionThunk, changeSearchKey } from '@/store/carSlice';
 import { useAppDispatch } from '@/store/hook';
+import { Language } from '@/utils/constant';
 
 import { Search } from '../Search/Search';
 import './Header.css';
@@ -21,6 +24,8 @@ const Header = () => {
   const params = useLocation();
   const [searchText, setSearchText] = useState<string>('');
   const debouncedValue = useDebounce<string>(searchText);
+  const { t } = useTranslation();
+  const { language, toggleLanguage } = useLanguage();
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> | undefined = (event) => {
     setSearchText(event.target.value);
@@ -49,17 +54,14 @@ const Header = () => {
                     </Popover.Button>
                     <Popover.Panel className="border-light absolute top-12 left-0 z-10 max-w-max rounded-xl border bg-white py-5 px-8 text-left">
                       <div className="flex flex-col">
-                        <a href="/" className="hover:text-blue-500">
-                          Analytics
+                        <a href="/" className="w-max hover:text-blue-500">
+                          {t('header.analytics')}
                         </a>
-                        <a href="/" className="hover:text-blue-500">
-                          Engagement
+                        <a href="/" className="w-max hover:text-blue-500">
+                          {t('header.security')}
                         </a>
-                        <a href="/" className="hover:text-blue-500">
-                          Security
-                        </a>
-                        <a href="/" className="hover:text-red-500">
-                          Logout
+                        <a href="/" className="w-max hover:text-red-500">
+                          {t('header.logout')}
                         </a>
                       </div>
                     </Popover.Panel>
@@ -83,7 +85,7 @@ const Header = () => {
             {!params.pathname.includes('/rental/') && (
               <div className="hidden md:block">
                 <Search
-                  placeHolder="Search something here"
+                  placeHolder={t('header.placeHolder')}
                   value={searchText}
                   onChange={handleChange}
                 />
@@ -97,9 +99,18 @@ const Header = () => {
             <div className="sm:border-light notification relative hidden h-11 w-11 p-3 hover:cursor-pointer sm:flex sm:items-center sm:justify-center sm:rounded-full sm:border">
               <Notification />
             </div>
-            <div className="sm:border-light hidden h-11 w-11 p-3 hover:cursor-pointer sm:flex sm:items-center sm:justify-center sm:rounded-full sm:border">
-              <Setting />
-            </div>
+            <Popover className="relative flex items-center">
+              <Popover.Button className="h-11 w-11 outline-none">
+                <div className="sm:border-light hidden h-11 w-11 p-3 hover:cursor-pointer sm:flex sm:items-center sm:justify-center sm:rounded-full sm:border">
+                  <Setting />
+                </div>
+              </Popover.Button>
+              <Popover.Panel className="border-light absolute top-12 right-0 z-10 max-w-max rounded-xl border bg-white py-5 px-8 text-right">
+                <button onClick={toggleLanguage}>
+                  <span>{language === Language.VN ? 'EN' : 'VN'}</span>
+                </button>
+              </Popover.Panel>
+            </Popover>
             <Popover className="relative flex items-center">
               <Popover.Button className="h-11 w-11 outline-none">
                 <img
@@ -111,17 +122,14 @@ const Header = () => {
               </Popover.Button>
               <Popover.Panel className="border-light absolute top-12 right-0 z-10 max-w-max rounded-xl border bg-white py-5 px-8 text-right">
                 <div className="flex flex-col">
-                  <a href="/" className="hover:text-blue-500">
-                    Analytics
+                  <a href="/" className="w-max hover:text-blue-500">
+                    {t('header.analytics')}
                   </a>
-                  <a href="/" className="hover:text-blue-500">
-                    Engagement
+                  <a href="/" className="w-max hover:text-blue-500">
+                    {t('header.security')}
                   </a>
-                  <a href="/" className="hover:text-blue-500">
-                    Security
-                  </a>
-                  <a href="/" className="hover:text-red-500">
-                    Logout
+                  <a href="/" className="w-max hover:text-red-500">
+                    {t('header.logout')}
                   </a>
                 </div>
               </Popover.Panel>
@@ -143,7 +151,7 @@ const Header = () => {
               ''
             )}
             <Search
-              placeHolder="Search something here"
+              placeHolder={t('header.placeHolder')}
               value={searchText}
               onChange={handleChange}
             />
