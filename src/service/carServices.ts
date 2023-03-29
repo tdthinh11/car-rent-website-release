@@ -45,7 +45,7 @@ mock.onGet(getUrl(CATEGORY)).reply(() => {
   const listType: categoryType[] = [];
   Object.keys(TypeCategory).forEach((item) => {
     listType.push({
-      name: item,
+      name: TypeCategory[item as keyof typeof TypeCategory],
       value: listAllCar.filter((car) => car.type.toLowerCase() === item.toLowerCase()).length,
       isSelected: false,
       section: 'TYPE',

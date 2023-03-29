@@ -5,12 +5,12 @@ export const BUS_TYPE = {
 };
 
 export enum TypeCategory {
-  Sport = 'sport',
-  SUV = 'suv',
-  MPV = 'mvp',
-  Sedan = 'sedan',
-  Couple = 'couple',
-  Hatchback = 'hatchback',
+  SPORT = 'Sport',
+  SUV = 'SUV',
+  MVP = 'MVP',
+  SEDAN = 'Sedan',
+  COUPLE = 'Couple',
+  HATCHBACK = 'Hatchback',
 }
 
 export enum CapacityCategory {

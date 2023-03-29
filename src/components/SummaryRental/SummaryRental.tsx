@@ -1,10 +1,31 @@
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
 import BgRectangle from '@/assets/images/bg_rectangle.png';
-import CarRentalDetail from '@/assets/images/car_rental_detail.png';
+import { IFormUpdate } from '@/model/interface';
+import { carActionThunk } from '@/store/carSlice';
+import { useAppDispatch, useAppSelector } from '@/store/hook';
 
 import { InputText } from '../InputText/InputText';
 import { Rating } from '../Rating/Rating';
 
-export const SummaryRental = () => {
+export const SummaryRental = ({ promoteCode, updateFields, register, errors }: IFormUpdate) => {
+  const dispatch = useAppDispatch();
+  const { carId } = useParams();
+  const { carDetail, searchKey, listAll } = useAppSelector((state) => state.carReducer);
+
+  useEffect(() => {
+    dispatch(carActionThunk.getListCarsApi(searchKey));
+  }, [dispatch, searchKey]);
+
+  useEffect(() => {
+    carId && dispatch(carActionThunk.updateCarDetailThunk(carId));
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }, [carId, dispatch, listAll]);
+
   return (
     <div className="rounded-[10px] bg-white p-4 lg:p-6">
       <div>
@@ -20,16 +41,16 @@ export const SummaryRental = () => {
           className="bg-primary mr-4 flex h-[116px] w-[80] cursor-pointer items-center justify-center rounded-[10px] bg-cover bg-no-repeat px-2 sm:w-[132px] "
           style={{ backgroundImage: `url(${BgRectangle})` }}
         >
-          <img src={CarRentalDetail} alt="look" />
+          <img src={carDetail?.imgSm} alt="look" />
         </div>
         <div>
           <h1 className="leading-140 text-black-2 md:leading-150 mb-3 text-xl font-bold md:text-[2rem]">
-            Nissan GT - R
+            {carDetail?.name}
           </h1>
           <div className="items-center md:flex">
-            <Rating rated={4} total={5} />
+            <Rating total={5} rated={carDetail?.rated ? carDetail?.rated : 0} />
             <p className="text-black-3 mt-[5px] text-xs font-medium tracking-tight md:ml-2 md:text-sm">
-              440+ Reviewer
+              {carDetail && carDetail?.review.length > 2 ? '2+' : carDetail?.review.length} Reviewer
             </p>
           </div>
         </div>
@@ -40,19 +61,32 @@ export const SummaryRental = () => {
           <p className="text-grey md:leading-150 text-xs font-semibold leading-[15px] tracking-tight md:text-base lg:font-medium">
             Subtotal
           </p>
-          <p className="leading-150 text-black-2 font-semibold tracking-tight">$80.00</p>
+          <p className="leading-150 text-black-2 font-semibold tracking-tight">
+            &#36;{carDetail?.price ? carDetail.price : 0}.00
+          </p>
         </div>
         <div className="mt-3 flex items-center justify-between lg:mt-6">
           <p className="text-grey md:leading-150 text-xs font-semibold leading-[15px] tracking-tight md:text-base lg:font-medium">
             Tax
           </p>
-          <p className="leading-150 text-black-2 font-semibold tracking-tight">$0</p>
+          <p className="leading-150 text-black-2 font-semibold tracking-tight">
+            &#36;{carDetail?.price ? (carDetail.price * 0.1).toFixed(2) : 0}
+          </p>
         </div>
         <div className="relative mt-6 lg:mt-8">
           <div className="hover:text-primary absolute top-1/2 right-8 -translate-y-1/2 duration-300 hover:cursor-pointer">
             Apply now
           </div>
-          <InputText placeholder="Apply promo code" />
+          <InputText
+            id="promoteCode"
+            error={errors?.promoteCode?.message}
+            placeholder="Apply promo code"
+            value={promoteCode}
+            register={register}
+            onChange={(e) => {
+              updateFields({ promoteCode: e.target.value });
+            }}
+          />
         </div>
       </div>
       <div className="mt-6 flex items-center justify-between lg:mt-8">
@@ -66,7 +100,7 @@ export const SummaryRental = () => {
           </p>
         </div>
         <div className="leading-150 text-xl font-bold tracking-tight lg:text-[32px] lg:leading-10">
-          $80.00
+          &#36;{carDetail?.price ? carDetail.price + carDetail.price * 0.1 : 0}
         </div>
       </div>
     </div>

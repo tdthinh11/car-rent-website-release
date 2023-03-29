@@ -27,13 +27,11 @@ export const Detail = () => {
       top: 0,
       behavior: 'smooth',
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [carId, listAll]);
+  }, [carId, dispatch, listAll]);
 
   useEffect(() => {
     dispatch(carActionThunk.getListCarsApi(searchKey));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchKey]);
+  }, [dispatch, searchKey]);
 
   useEffect(() => {
     const sliderDataUpdate = carDetail?.carouselDetail.showImg.map((item, index) => {

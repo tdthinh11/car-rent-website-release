@@ -79,7 +79,7 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
                   return (
                     <div key={item.name} className="mb-4 flex items-center md:mb-8">
                       <CheckBox
-                        type="square"
+                        variant="square"
                         id={item.name}
                         label={item.name}
                         checked={item.isSelected}
@@ -105,7 +105,7 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
                   return (
                     <div key={item.name} className="mb-4 flex items-center md:mb-8">
                       <CheckBox
-                        type="square"
+                        variant="square"
                         id={item.name}
                         checked={item.isSelected}
                         label={`${CapacityCategory[item.name as keyof typeof CapacityCategory]} ${
@@ -156,7 +156,7 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
                   return (
                     <div key={item.name} className="mb-4 flex items-center md:mb-8">
                       <CheckBox
-                        type="square"
+                        variant="square"
                         id={item.name}
                         label={item.name}
                         checked={item.isSelected}
@@ -182,7 +182,7 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
                   return (
                     <div key={item.name} className="mb-4 flex items-center md:mb-8">
                       <CheckBox
-                        type="square"
+                        variant="square"
                         id={item.name}
                         checked={item.isSelected}
                         label={`${CapacityCategory[item.name as keyof typeof CapacityCategory]} ${

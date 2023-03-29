@@ -4,14 +4,17 @@ import Checked from '@/assets/icons/Checked';
 
 import './CheckBox.css';
 
-interface CheckBoxProps {
+interface CheckBoxProps
+  extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   id: string;
   label: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  type?: 'circle' | 'square';
+  variant?: 'circle' | 'square';
   classLabel?: string;
   checked?: boolean;
   name?: string;
+  type?: 'checkbox' | 'radio';
+  value?: string;
 }
 
 const variantStyles = {
@@ -25,24 +28,44 @@ const CheckBox = ({
   label,
   onChange,
   checked,
-  type = 'circle',
+  variant = 'circle',
   classLabel = labelClassDefault,
   name,
+  type = 'checkbox',
+  value,
+  ...props
 }: CheckBoxProps) => {
   return (
-    <label htmlFor={id} className="flex w-max items-center gap-2 hover:cursor-pointer">
-      <input
-        type="checkbox"
-        name={name}
-        id={id}
-        checked={checked}
-        onChange={onChange}
-        className="hidden"
-      />
-      {type === 'circle' ? (
-        <div className={`checkbox-circle ${variantStyles[type]}`}></div>
+    <label
+      htmlFor={id}
+      className="checkbox_radio flex w-max items-center gap-2 hover:cursor-pointer"
+    >
+      {type === 'checkbox' ? (
+        <input
+          type={type}
+          name={name}
+          id={id}
+          checked={checked}
+          onChange={onChange}
+          className="hidden"
+          {...props}
+        />
       ) : (
-        <div className={`checkbox-square ${variantStyles[type]}`}>
+        <input
+          type={type}
+          name={name}
+          id={id}
+          value={value}
+          checked={checked}
+          onChange={onChange}
+          className="hidden"
+          {...props}
+        />
+      )}
+      {variant === 'circle' ? (
+        <div className={`checkbox-circle ${variantStyles[variant]}`}></div>
+      ) : (
+        <div className={`checkbox-square ${variantStyles[variant]}`}>
           <div className="square-icon">
             <Checked className="h-full w-full" />
           </div>

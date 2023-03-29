@@ -47,6 +47,17 @@ p {
   opacity: 0;
 }
 
+.ant-notification-notice .ant-notification-notice-icon {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+}
+
+.ant-notification-notice .ant-notification-notice-with-icon .ant-notification-notice-message {
+  margin-bottom: 0px;
+}
+
 @layer components {
   .wrapper {
     @apply mx-auto max-w-[1440px];

@@ -1,53 +1,81 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 import SAFETY from '@/assets/images/Layer_Safe.png';
+import Button from '@/components/Button/Button';
+import CheckBox from '@/components/CheckBox/CheckBox';
+import { IFormUpdate } from '@/model/interface';
 
-import Button from '../Button/Button';
-import CheckBox from '../CheckBox/CheckBox';
-import { RentalForm } from './RentalForm';
+interface IConfirmation {
+  id: string;
+  label: string;
+  isConfirm: boolean;
+}
 
-export const Confirmation = () => {
+interface IConfirmationProps extends IFormUpdate {
+  onSubmit: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+const confirmationList: IConfirmation[] = [
+  {
+    id: 'confirmOne',
+    label: 'I agree with sending an Marketing and newsletter emails. No spam, promised!',
+    isConfirm: false,
+  },
+  {
+    id: 'confirmTwo',
+    label: 'I agree with our terms and conditions and privacy policy.',
+    isConfirm: false,
+  },
+];
+
+export const Confirmation = ({ updateFields, onSubmit, errors }: IConfirmationProps) => {
+  const [confirmList, setConfirmList] = useState<IConfirmation[]>([...confirmationList]);
+  useEffect(() => {
+    const countConfirmed = confirmList.filter((item) => item.isConfirm === true).length;
+    countConfirmed === confirmList.length
+      ? updateFields({ confirmation: true })
+      : updateFields({ confirmation: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [confirmList]);
   return (
-    <RentalForm
-      title="Confirmation"
-      description="We are getting to the end. Just few clicks and your rental is ready!"
-      current={4}
-      total={4}
-    >
-      <div>
-        <div className="bg-bg mt-5 flex items-center justify-between rounded-[10px] p-4">
-          <CheckBox
-            id="confirm-one"
-            label="I agree with sending an Marketing and newsletter emails. No spam, promised!"
-            onChange={() => console.log()}
-            name="payment"
-            classLabel="lg:leading-150 leading-160 text-black-2 ml-2 text-xs font-medium tracking-tight lg:ml-5 lg:text-base lg:font-semibold"
-            type="square"
-          />
-        </div>
-        <div className="bg-bg mt-5 mb-6 flex items-center justify-between rounded-[10px] p-4">
-          <CheckBox
-            id="confirm-two"
-            label="I agree with our terms and conditions and privacy policy."
-            onChange={() => console.log()}
-            name="payment"
-            classLabel="lg:leading-150 leading-160 text-black-2 ml-2 text-xs font-medium tracking-tight lg:ml-5 lg:text-base lg:font-semibold"
-            type="square"
-          />
-        </div>
-        <Button variant="primary" className="py-[10px] px-[16px]">
-          Rental Now
-        </Button>
-        <img src={SAFETY} alt="safety" className="mt-[34px]" />
-        <div className="mt-[14px]">
-          <h3 className="leading-150 text-black-2 font-bold tracking-tight">
-            All your data are safe
-          </h3>
-          <p className="text-grey mt-1 text-xs font-medium tracking-tight">
-            We are using the most advanced security to provide you the best experience ever.
-          </p>
-        </div>
+    <div>
+      {confirmList.map((confirmItem, index) => {
+        return (
+          <div
+            key={confirmItem.id}
+            className={`bg-bg mt-5 flex items-center justify-between rounded-[10px] p-4 ${
+              index === confirmationList.length - 1 ? '' : ''
+            }`}
+          >
+            <CheckBox
+              id={confirmItem.id}
+              label={confirmItem.label}
+              onChange={(e) => {
+                const updateList = [...confirmList];
+                updateList[index] = { ...updateList[index], isConfirm: e.currentTarget.checked };
+                setConfirmList(updateList);
+              }}
+              name="confirmation"
+              checked={confirmItem.isConfirm}
+              classLabel="lg:leading-150 leading-160 text-black-2 ml-2 text-xs font-medium tracking-tight lg:ml-5 lg:text-base lg:font-semibold"
+              variant="square"
+            />
+          </div>
+        );
+      })}
+      <p className="mt-1 mb-6 text-xs text-red-400">{errors?.confirmation?.message}</p>
+      <Button type="submit" variant="primary" className="py-[10px] px-[16px]" onClick={onSubmit}>
+        Rental Now
+      </Button>
+      <img src={SAFETY} alt="safety" className="mt-[34px]" />
+      <div className="mt-[14px]">
+        <h3 className="leading-150 text-black-2 font-bold tracking-tight">
+          All your data are safe
+        </h3>
+        <p className="text-grey mt-1 text-xs font-medium tracking-tight">
+          We are using the most advanced security to provide you the best experience ever.
+        </p>
       </div>
-    </RentalForm>
+    </div>
   );
 };
