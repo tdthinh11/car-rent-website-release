@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import CheckBox from '@/components/CheckBox/CheckBox';
@@ -14,6 +15,7 @@ type CategorySidebarType = {
 };
 
 export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -70,7 +72,7 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
         <div className="flex flex-wrap justify-between gap-4 p-8 lg:hidden">
           <div className="grow basis-0">
             <p className="text-grey mb-4 text-xs font-semibold leading-[15px] tracking-tight">
-              TYPE
+              {t('common.type')}
             </p>
             <div>
               {categoryValue
@@ -96,7 +98,7 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
           </div>
           <div className="grow basis-0">
             <p className="text-grey mb-4 text-xs font-semibold leading-[15px] tracking-tight">
-              CAPACITY
+              {t('common.capacity')}
             </p>
             <div>
               {categoryValue
@@ -111,8 +113,8 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
                         label={`${CapacityCategory[item.name as keyof typeof CapacityCategory]} ${
                           categoryValue.filter((item) => item.section === 'CAPACITY').length - 1 !==
                           index
-                            ? 'Person'
-                            : 'or More'
+                            ? t('common.person')
+                            : t('common.orMore')
                         }`}
                         classLabel="text-xl leading-150 text-second tracking-tight"
                         onChange={(e) => onChangeCheckbox(e, item)}
@@ -127,7 +129,7 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
           </div>
           <div className="w-full grow basis-0">
             <p className="text-grey mb-4 text-xs font-semibold leading-[15px] tracking-tight">
-              PRICE
+              {t('common.price')}
             </p>
             <div>
               <Slider
@@ -147,7 +149,7 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
         <div className="hidden flex-wrap justify-between gap-4 p-8 lg:flex">
           <div className="grow basis-0">
             <p className="text-grey mb-4 text-xs font-semibold leading-[15px] tracking-tight">
-              TYPE
+              {t('common.type')}
             </p>
             <div>
               {categoryValue
@@ -173,7 +175,7 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
           </div>
           <div className="grow basis-0">
             <p className="text-grey mb-4 text-xs font-semibold leading-[15px] tracking-tight">
-              CAPACITY
+              {t('common.capacity')}
             </p>
             <div>
               {categoryValue
@@ -188,8 +190,8 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
                         label={`${CapacityCategory[item.name as keyof typeof CapacityCategory]} ${
                           categoryValue.filter((item) => item.section === 'CAPACITY').length - 1 !==
                           index
-                            ? 'Person'
-                            : 'or More'
+                            ? t('common.person')
+                            : t('common.orMore')
                         }`}
                         classLabel="text-xl leading-150 text-second tracking-tight"
                         onChange={(e) => onChangeCheckbox(e, item)}
@@ -204,7 +206,7 @@ export const CategorySidebar = ({ variant = 'lg' }: CategorySidebarType) => {
           </div>
           <div className="w-full grow basis-0">
             <p className="text-grey mb-4 text-xs font-semibold leading-[15px] tracking-tight">
-              PRICE
+              {t('common.price')}
             </p>
             <div>
               <Slider

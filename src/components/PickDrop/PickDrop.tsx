@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/20/solid';
@@ -34,6 +35,7 @@ const PickDrop = ({
   id,
   handleChangeCheckBox,
 }: PickDropProps) => {
+  const { t } = useTranslation();
   const [value, setValue] = useState<IPickDropValue>({
     location: null,
     date: '',
@@ -78,7 +80,7 @@ const PickDrop = ({
           <div className="absolute top-0 left-0 z-[1] h-full w-full cursor-not-allowed" />
         )}
         <div className="s375:grow s375:border-r s375:basis-0 border-light px-4">
-          <h3>Location</h3>
+          <h3>{t('common.location')}</h3>
           <Listbox
             value={value.location}
             onChange={(value: ILocation) => handleChangeLocation(value)}
@@ -131,7 +133,7 @@ const PickDrop = ({
           </Listbox>
         </div>
         <div className="s375:grow s375:border-r s375:basis-0 border-light px-4">
-          <h3>Date</h3>
+          <h3>{t('common.date')}</h3>
           <div className="relative pt-2">
             <div className="flex h-6 justify-between">
               <span className="text-grey my-1 block truncate text-xs leading-4 tracking-[0.01em]">
@@ -151,7 +153,7 @@ const PickDrop = ({
           </div>
         </div>
         <div className="s375:grow s375:basis-0 px-4">
-          <h3>Time</h3>
+          <h3>{t('common.time')}</h3>
           <div className="relative pt-2">
             <div className="flex h-6 justify-between">
               <span className="text-grey my-1 block truncate text-xs leading-4 tracking-[0.01em]">

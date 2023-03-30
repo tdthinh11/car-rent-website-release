@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import SAFETY from '@/assets/images/Layer_Safe.png';
 import Button from '@/components/Button/Button';
@@ -18,17 +19,18 @@ interface IConfirmationProps extends IFormUpdate {
 const confirmationList: IConfirmation[] = [
   {
     id: 'confirmOne',
-    label: 'I agree with sending an Marketing and newsletter emails. No spam, promised!',
+    label: 'rental.confirmation.confirmOne',
     isConfirm: false,
   },
   {
     id: 'confirmTwo',
-    label: 'I agree with our terms and conditions and privacy policy.',
+    label: 'rental.confirmation.confirmTwo',
     isConfirm: false,
   },
 ];
 
 export const Confirmation = ({ updateFields, onSubmit, errors }: IConfirmationProps) => {
+  const { t } = useTranslation();
   const [confirmList, setConfirmList] = useState<IConfirmation[]>([...confirmationList]);
   useEffect(() => {
     const countConfirmed = confirmList.filter((item) => item.isConfirm === true).length;
@@ -49,7 +51,7 @@ export const Confirmation = ({ updateFields, onSubmit, errors }: IConfirmationPr
           >
             <CheckBox
               id={confirmItem.id}
-              label={confirmItem.label}
+              label={`${t(confirmItem.label)}`}
               onChange={(e) => {
                 const updateList = [...confirmList];
                 updateList[index] = { ...updateList[index], isConfirm: e.currentTarget.checked };

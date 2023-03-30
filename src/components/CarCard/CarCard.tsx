@@ -1,5 +1,6 @@
 /* eslint-disable tailwindcss/enforces-negative-arbitrary-values */
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import Gas from '@/assets/icons/Gas';
@@ -47,6 +48,7 @@ export const CarCard = ({
   carId,
   steering,
 }: CarCardProps) => {
+  const { t } = useTranslation();
   return (
     <div className="relative">
       <div className="absolute top-4 right-4 hover:cursor-pointer" onClick={onClickLike}>
@@ -91,7 +93,7 @@ export const CarCard = ({
       </Link>
       <Link to={`/rental/${carId}`} className="absolute right-4 bottom-4 hover:cursor-pointer">
         <Button variant="primary" className="py-[10px] px-[16px]">
-          Rental Now
+          {t('common.rental')}
         </Button>
       </Link>
     </div>

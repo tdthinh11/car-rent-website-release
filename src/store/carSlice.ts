@@ -180,7 +180,7 @@ export const getCategoryData = (): AppThunk => {
     dispatch(
       updateCategoryValue([
         ...data.data,
-        { name: 'Price', value: 0, section: 'PRICE', isSelected: true },
+        { name: 'Price', value: MAX_PRICE, section: 'PRICE', isSelected: true },
       ]),
     );
   };

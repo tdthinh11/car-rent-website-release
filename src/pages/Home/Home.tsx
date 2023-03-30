@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Ads1 from '@/assets/images/AdsOne.png';
 import Ads2 from '@/assets/images/AdsTwo.png';
@@ -27,6 +28,7 @@ const Home = () => {
   const [pickChecked, setPickChecked] = useState<boolean>(false);
   const { searchKey, listAll, locations, isLoading } = useAppSelector((state) => state.carReducer);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     dispatch(carActionThunk.getListCarsApi(searchKey));
@@ -70,7 +72,7 @@ const Home = () => {
           <div className="mt-8 flex flex-col items-center justify-between gap-8 md:flex-row md:gap-12 lg:gap-36">
             <div className={`w-full grow basis-0 ${isSwap ? 'order-1' : 'order-2'}`}>
               <PickDrop
-                tittle="Pick - Up"
+                tittle={t('common.pickUp')}
                 listLocation={locations}
                 value={pickUpValue}
                 handleChangeValue={setPickUpValue}
@@ -81,7 +83,7 @@ const Home = () => {
             </div>
             <div className={`w-full grow basis-0 ${isSwap ? 'order-2' : 'order-1'}`}>
               <PickDrop
-                tittle="Drop-Off"
+                tittle={t('common.dropOff')}
                 listLocation={locations}
                 value={dropOffValue}
                 handleChangeValue={setDropOffValue}

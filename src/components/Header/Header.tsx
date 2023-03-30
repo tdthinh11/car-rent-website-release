@@ -52,18 +52,25 @@ const Header = () => {
                     <Popover.Button className="h-11 w-11 outline-none">
                       <Menu className="h-10 w-10" />
                     </Popover.Button>
-                    <Popover.Panel className="border-light absolute top-12 left-0 z-10 max-w-max rounded-xl border bg-white py-5 px-8 text-left">
-                      <div className="flex flex-col">
-                        <a href="/" className="w-max hover:text-blue-500">
-                          {t('header.analytics')}
-                        </a>
-                        <a href="/" className="w-max hover:text-blue-500">
-                          {t('header.security')}
-                        </a>
-                        <a href="/" className="w-max hover:text-red-500">
-                          {t('header.logout')}
-                        </a>
+                    <Popover.Panel className="border-light absolute top-10 left-0 z-10 flex max-w-max gap-4 rounded-xl border bg-white p-4 text-left">
+                      <div className="sm:border-light h-11 w-11 p-3 hover:cursor-pointer sm:flex sm:items-center sm:justify-center sm:rounded-full sm:border">
+                        <Heart className="fill-current text-[#596780]" />
                       </div>
+                      <div className="sm:border-light notification relative h-11 w-11 p-3 hover:cursor-pointer sm:flex sm:items-center sm:justify-center sm:rounded-full sm:border">
+                        <Notification />
+                      </div>
+                      <Popover className="relative flex items-center">
+                        <Popover.Button className="h-11 w-11 outline-none">
+                          <div className="sm:border-light h-11 w-11 p-3 hover:cursor-pointer sm:flex sm:items-center sm:justify-center sm:rounded-full sm:border">
+                            <Setting />
+                          </div>
+                        </Popover.Button>
+                        <Popover.Panel className="border-light absolute top-12 right-0 z-10 max-w-max rounded-xl border bg-white py-5 px-8 text-right">
+                          <button onClick={toggleLanguage}>
+                            <span>{language === Language.VN ? 'EN' : 'VN'}</span>
+                          </button>
+                        </Popover.Panel>
+                      </Popover>
                     </Popover.Panel>
                   </Popover>
                 </div>

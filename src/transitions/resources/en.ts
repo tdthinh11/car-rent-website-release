@@ -18,6 +18,10 @@ export default {
     review: 'Reviewer',
     pickUp: 'Pick-Up',
     dropOff: 'Drop-Off',
+    type: 'TYPE',
+    capacity: 'CAPACITY',
+    price: 'PRICE',
+    orMore: 'or More',
   },
   header: {
     placeHolder: 'Search something here',

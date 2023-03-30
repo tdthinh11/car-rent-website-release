@@ -1,4 +1,4 @@
-import { Path } from 'react-hook-form';
+import { Path, UseFormRegister } from 'react-hook-form';
 
 import { ArrowDown } from '@/assets/icons/ArrowDown';
 import { IPayment } from '@/model/interface';
@@ -12,8 +12,8 @@ interface ISelection {
   placeholder: string;
   option: IOptionSelection[];
   label: string;
-  id?: Path<IPayment>;
-  register?: unknown;
+  id: Path<IPayment>;
+  register: UseFormRegister<IPayment>;
   onChange?: React.ChangeEventHandler<HTMLSelectElement>;
   error?: string;
 }

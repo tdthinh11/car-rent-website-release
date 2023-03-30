@@ -18,6 +18,10 @@ export default {
     review: 'Đánh giá',
     pickUp: 'Nhận xe',
     dropOff: 'Trả xe',
+    type: 'LOẠI XE',
+    capacity: 'SỐ GHẾ',
+    price: 'GIÁ',
+    orMore: 'hoặc nhiều hơn',
   },
   header: {
     placeHolder: 'Tìm kiếm',

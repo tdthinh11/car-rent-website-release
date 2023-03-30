@@ -1,4 +1,4 @@
-import { Path } from 'react-hook-form';
+import { Path, UseFormRegister } from 'react-hook-form';
 
 import { IPayment } from '@/model/interface';
 
@@ -13,7 +13,7 @@ interface InputTextProps {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error?: string;
-  register?: unknown;
+  register: UseFormRegister<IPayment>;
 }
 
 export const InputText = ({

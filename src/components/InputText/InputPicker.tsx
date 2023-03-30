@@ -1,4 +1,4 @@
-import { Path } from 'react-hook-form';
+import { Path, UseFormRegister } from 'react-hook-form';
 
 import { ArrowDown } from '@/assets/icons/ArrowDown';
 import { IPayment } from '@/model/interface';
@@ -9,9 +9,9 @@ interface InputPickerProps {
   label: string;
   type: 'date' | 'time';
   placeholder: string;
-  id?: Path<IPayment>;
+  id: Path<IPayment>;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  register?: unknown;
+  register: UseFormRegister<IPayment>;
   value?: string;
   error?: string;
 }

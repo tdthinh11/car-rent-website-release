@@ -81,6 +81,7 @@ export const SummaryRental = ({ promoteCode, updateFields, register, errors }: I
           </div>
           <InputText
             id="promoteCode"
+            label=""
             error={errors?.promoteCode?.message}
             placeholder="Apply promo code"
             value={promoteCode}

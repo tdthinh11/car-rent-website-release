@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Button from '@/components/Button/Button';
 import { CarCard } from '@/components/CarCard/CarCard';
@@ -16,6 +17,7 @@ const initPickDropValue: IPickDropValue = {
 };
 
 export const Category = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { listAll, searchKey, locations } = useAppSelector((state) => state.carReducer);
   const [isViewAll, setIsViewAll] = useState<boolean>(false);
@@ -45,7 +47,7 @@ export const Category = () => {
             <div className="mt-8 flex flex-col items-center justify-between gap-8 md:flex-row md:gap-11">
               <div className={`w-full grow basis-0 ${isSwap ? 'order-1' : 'order-2'}`}>
                 <PickDrop
-                  tittle="Pick - Up"
+                  tittle={t('common.pickUp')}
                   listLocation={locations}
                   value={pickUpValue}
                   handleChangeValue={setPickUpValue}
@@ -56,7 +58,7 @@ export const Category = () => {
               </div>
               <div className={`w-full grow basis-0 ${isSwap ? 'order-2' : 'order-1'}`}>
                 <PickDrop
-                  tittle="Drop-Off"
+                  tittle={t('common.dropOff')}
                   listLocation={locations}
                   value={dropOffValue}
                   handleChangeValue={setDropOffValue}
@@ -159,7 +161,7 @@ export const Category = () => {
                   })
                 )
               ) : (
-                <h1>List of cars are empty</h1>
+                <h1>{t('common.listCarEmpty')}</h1>
               )}
             </div>
             {isLoadingAll && <h3 className="my-5 text-center">Loading ...</h3>}
@@ -174,10 +176,10 @@ export const Category = () => {
                   }, 1000);
                 }}
               >
-                {!isViewAll ? 'Show more car' : 'Show less'}
+                {!isViewAll ? t('common.showMore') : t('common.showLess')}
               </Button>
               <span className="text-grey absolute right-0 top-1/2 -translate-y-1/2 text-sm font-bold leading-[18px]">
-                {listAll.length} cars
+                {listAll.length} {t('common.cars')}
               </span>
             </div>
           </div>
