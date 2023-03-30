@@ -22,7 +22,9 @@ export const RentalInfo = ({
       <div className="mt-4">
         <div className="mb-5 flex items-center lg:col-span-6">
           <div className="bg-light-blue after:contents[*] after:bg-primary flex h-4 w-4 items-center justify-center rounded-full after:absolute after:h-2 after:w-2 after:rounded-full" />
-          <h3 className="text-black-2 ml-2 font-semibold tracking-tight">{t('common.pickUp')}</h3>
+          <h3 className="text-color-bold ml-2 font-semibold tracking-tight">
+            {t('common.pickUp')}
+          </h3>
         </div>
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-6">
@@ -71,7 +73,9 @@ export const RentalInfo = ({
       <div className="mt-6 lg:mt-8">
         <div className="mb-5 flex items-center lg:mb-6">
           <div className="bg-light-blue-1 after:contents[*] after:bg-secondary flex h-4 w-4 items-center justify-center rounded-full after:absolute after:h-2 after:w-2 after:rounded-full" />
-          <h3 className="text-black-2 ml-2 font-semibold tracking-tight">{t('common.dropOff')}</h3>
+          <h3 className="text-color-bold ml-2 font-semibold tracking-tight">
+            {t('common.dropOff')}
+          </h3>
         </div>
         <div className="gap-8 lg:grid lg:grid-cols-12">
           <div className="lg:col-span-6">

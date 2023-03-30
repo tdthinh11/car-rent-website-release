@@ -3,30 +3,37 @@ import { useTranslation } from 'react-i18next';
 
 import Ads1 from '@/assets/images/AdsOne.png';
 import Ads2 from '@/assets/images/AdsTwo.png';
-import PickDrop, { IPickDropValue } from '@/components/PickDrop/PickDrop';
+import PickDrop from '@/components/PickDrop/PickDrop';
 import PopularCar from '@/components/PopularCar/PopularCar';
 import RecommendCar from '@/components/RecommendCar/RecommendCar';
 import { SwapButton } from '@/components/SwapButton/SwapButton';
 import { carType } from '@/model/cars';
 import AdsCard from '@/pages/Home/AdsCard';
-import { carActionThunk } from '@/store/carSlice';
+import {
+  carActionThunk,
+  updateDropChecked,
+  updateDropOffValue,
+  updatePickChecked,
+  updatePickUpValue,
+} from '@/store/carSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
 
 import './style.css';
 
-const initPickDropValue: IPickDropValue = {
-  location: null,
-  date: '',
-  time: '',
-};
-
 const Home = () => {
   const [isSwap, setIsSwap] = useState<boolean>(false);
-  const [pickUpValue, setPickUpValue] = useState<IPickDropValue>(initPickDropValue);
-  const [dropOffValue, setDropOffValue] = useState<IPickDropValue>(initPickDropValue);
-  const [dropChecked, setDropChecked] = useState<boolean>(false);
-  const [pickChecked, setPickChecked] = useState<boolean>(false);
-  const { searchKey, listAll, locations, isLoading } = useAppSelector((state) => state.carReducer);
+  // const [dropChecked, setDropChecked] = useState<boolean>(false);
+  // const [pickChecked, setPickChecked] = useState<boolean>(false);
+  const {
+    searchKey,
+    listAll,
+    locations,
+    isLoading,
+    pickUpValue,
+    dropOffValue,
+    dropChecked,
+    pickChecked,
+  } = useAppSelector((state) => state.carReducer);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
@@ -37,6 +44,10 @@ const Home = () => {
   useEffect(() => {
     dispatch(carActionThunk.getListLocation());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(carActionThunk.filterByCategory());
+  }, [dispatch, pickUpValue, dropOffValue, dropChecked, pickChecked]);
 
   const changeStatusIsLiked = (car: carType) => {
     dispatch(carActionThunk.changeIsLikeStatus(car));
@@ -75,8 +86,10 @@ const Home = () => {
                 tittle={t('common.pickUp')}
                 listLocation={locations}
                 value={pickUpValue}
-                handleChangeValue={setPickUpValue}
-                handleChangeCheckBox={() => setPickChecked((prev) => !prev)}
+                handleChangeValue={(value) => {
+                  dispatch(updatePickUpValue(value));
+                }}
+                handleChangeCheckBox={() => dispatch(updatePickChecked())}
                 id="pick-up"
                 isChecked={pickChecked}
               />
@@ -86,8 +99,10 @@ const Home = () => {
                 tittle={t('common.dropOff')}
                 listLocation={locations}
                 value={dropOffValue}
-                handleChangeValue={setDropOffValue}
-                handleChangeCheckBox={() => setDropChecked((prev) => !prev)}
+                handleChangeValue={(value) => {
+                  dispatch(updateDropOffValue(value));
+                }}
+                handleChangeCheckBox={() => dispatch(updateDropChecked())}
                 id="drop-off"
                 isChecked={dropChecked}
               />

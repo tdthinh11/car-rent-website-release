@@ -21,7 +21,7 @@ const variantStyles = {
   circle: 'w-4 h-4 rounded-full relative flex items-center justify-center items-center',
   square: 'w-5 h-5 rounded relative flex items-center justify-center items-center ',
 };
-const labelClassDefault = 'text-black-2 font-semibold leading-[150%] tracking-tight';
+const labelClassDefault = 'text-color-bold font-semibold leading-[150%] tracking-tight';
 
 const CheckBox = ({
   id,

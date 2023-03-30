@@ -21,7 +21,7 @@ export const Footer = () => {
           </div>
           <div className="flex flex-wrap justify-between gap-12 lg:grow lg:basis-0 lg:gap-0">
             <div>
-              <h2 className="text-black-2 mb-4 text-xl font-semibold leading-[150%]">
+              <h2 className="text-color-bold mb-4 text-xl font-semibold leading-[150%]">
                 {t('footer.about')}
               </h2>
               <div className="flex flex-col">
@@ -39,7 +39,7 @@ export const Footer = () => {
               </div>
             </div>
             <div>
-              <h2 className="text-black-2 mb-4 text-xl font-semibold leading-[150%]">
+              <h2 className="text-color-bold mb-4 text-xl font-semibold leading-[150%]">
                 {t('footer.socials')}
               </h2>
               <div className="flex flex-col">
@@ -57,7 +57,7 @@ export const Footer = () => {
               </div>
             </div>
             <div>
-              <h2 className="text-black-2 mb-4 text-xl font-semibold leading-[150%]">
+              <h2 className="text-color-bold mb-4 text-xl font-semibold leading-[150%]">
                 {t('footer.community')}
               </h2>
               <div className="flex flex-col">
@@ -78,14 +78,14 @@ export const Footer = () => {
         </div>
         <div className="md:border-light pt-12 md:mt-8 md:border-t md:pt-8 lg:flex lg:items-center lg:justify-between">
           <div className="flex justify-between lg:order-2">
-            <p className="text-black-2 text-xs font-semibold leading-[15px] tracking-tight">
+            <p className="text-color-bold text-xs font-semibold leading-[15px] tracking-tight">
               Privacy &#38; Policy
             </p>
-            <p className="text-black-2 text-xs font-semibold leading-[15px] tracking-tight">
+            <p className="text-color-bold text-xs font-semibold leading-[15px] tracking-tight">
               Terms &#38; Condition
             </p>
           </div>
-          <p className="text-black-2 mt-8 text-xs font-semibold leading-[15px] tracking-tight lg:order-1 lg:mt-0 lg:flex">
+          <p className="text-color-bold mt-8 text-xs font-semibold leading-[15px] tracking-tight lg:order-1 lg:mt-0 lg:flex">
             &#64;2022 MORENT. All rights reserved
           </p>
         </div>

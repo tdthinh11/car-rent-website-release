@@ -124,7 +124,7 @@ export const Detail = () => {
           </div>
           <div className="mt-8 flex flex-wrap items-center justify-between gap-2">
             <div>
-              <h1 className="text-black-2 text-xl font-bold leading-6">
+              <h1 className="text-color-bold text-xl font-bold leading-6">
                 &#36;{carDetail?.price}.00/
                 <span className="text-grey text-sm">{t('common.day')}</span>
               </h1>

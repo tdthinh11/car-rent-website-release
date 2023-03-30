@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { InputText } from '@/components/InputText/InputText';
 import { IFormUpdate } from '@/model/interface';
+import { formatPhoneNumber } from '@/utils/text';
 
 export const BillingInfo = ({
   name,
@@ -46,7 +47,7 @@ export const BillingInfo = ({
           label={t('rental.billingInfo.phoneNumber')}
           placeholder={t('rental.billingInfo.phoneNumber')}
           register={register}
-          value={phoneNumber}
+          value={formatPhoneNumber(phoneNumber)}
           onChange={(e) => {
             updateFields({ phoneNumber: e.target.value });
           }}

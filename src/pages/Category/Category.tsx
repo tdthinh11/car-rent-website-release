@@ -4,33 +4,34 @@ import { useTranslation } from 'react-i18next';
 import Button from '@/components/Button/Button';
 import { CarCard } from '@/components/CarCard/CarCard';
 import { CategorySidebar } from '@/components/CategorySidebar/CategorySidebar';
-import PickDrop, { IPickDropValue } from '@/components/PickDrop/PickDrop';
+import PickDrop from '@/components/PickDrop/PickDrop';
 import { SwapButton } from '@/components/SwapButton/SwapButton';
 import { carType } from '@/model/cars';
-import { carActionThunk } from '@/store/carSlice';
+import {
+  carActionThunk,
+  updateDropChecked,
+  updateDropOffValue,
+  updatePickChecked,
+  updatePickUpValue,
+} from '@/store/carSlice';
 import { useAppDispatch, useAppSelector } from '@/store/hook';
-
-const initPickDropValue: IPickDropValue = {
-  location: null,
-  date: '',
-  time: '',
-};
 
 export const Category = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const { listAll, searchKey, locations } = useAppSelector((state) => state.carReducer);
+  const { listAll, searchKey, locations, pickUpValue, dropOffValue, pickChecked, dropChecked } =
+    useAppSelector((state) => state.carReducer);
   const [isViewAll, setIsViewAll] = useState<boolean>(false);
   const [isLoadingAll, setIsLoadingAll] = useState<boolean>(false);
-  const [pickUpValue, setPickUpValue] = useState<IPickDropValue>(initPickDropValue);
-  const [dropOffValue, setDropOffValue] = useState<IPickDropValue>(initPickDropValue);
   const [isSwap, setIsSwap] = useState<boolean>(false);
-  const [dropChecked, setDropChecked] = useState<boolean>(false);
-  const [pickChecked, setPickChecked] = useState<boolean>(false);
 
   useEffect(() => {
     dispatch(carActionThunk.getListCarsApi(searchKey));
   }, [dispatch, searchKey]);
+
+  useEffect(() => {
+    dispatch(carActionThunk.filterByCategory());
+  }, [dispatch, pickUpValue, dropOffValue, dropChecked, pickChecked]);
 
   const changeStatusIsLiked = (car: carType) => {
     dispatch(carActionThunk.changeIsLikeStatus(car));
@@ -50,8 +51,10 @@ export const Category = () => {
                   tittle={t('common.pickUp')}
                   listLocation={locations}
                   value={pickUpValue}
-                  handleChangeValue={setPickUpValue}
-                  handleChangeCheckBox={() => setPickChecked((prev) => !prev)}
+                  handleChangeValue={(value) => {
+                    dispatch(updatePickUpValue(value));
+                  }}
+                  handleChangeCheckBox={() => dispatch(updatePickChecked())}
                   id="pick-up"
                   isChecked={pickChecked}
                 />
@@ -61,8 +64,10 @@ export const Category = () => {
                   tittle={t('common.dropOff')}
                   listLocation={locations}
                   value={dropOffValue}
-                  handleChangeValue={setDropOffValue}
-                  handleChangeCheckBox={() => setDropChecked((prev) => !prev)}
+                  handleChangeValue={(value) => {
+                    dispatch(updateDropOffValue(value));
+                  }}
+                  handleChangeCheckBox={() => dispatch(updateDropChecked())}
                   id="drop-off"
                   isChecked={dropChecked}
                 />

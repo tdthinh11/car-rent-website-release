@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { IPickDropValue } from '@/components/PickDrop/PickDrop';
 import { carType } from '@/model/cars';
 import { carServices, categoryType } from '@/service/carServices';
 import { CapacityCategory, MAX_PRICE, TypeCategory } from '@/utils/constant';
@@ -13,6 +14,10 @@ export type carReducerType = {
   isLoading: boolean;
   carDetail: carType | null;
   categoryValue: categoryType[];
+  pickUpValue: IPickDropValue;
+  dropOffValue: IPickDropValue;
+  pickChecked: boolean;
+  dropChecked: boolean;
 };
 
 const initialState: carReducerType = {
@@ -22,6 +27,18 @@ const initialState: carReducerType = {
   isLoading: false,
   carDetail: null,
   categoryValue: [],
+  pickUpValue: {
+    location: null,
+    date: '',
+    time: '',
+  },
+  dropOffValue: {
+    location: null,
+    date: '',
+    time: '',
+  },
+  pickChecked: false,
+  dropChecked: false,
 };
 
 const carSlice = createSlice({
@@ -46,6 +63,18 @@ const carSlice = createSlice({
     updateCategoryValue: (state, action) => {
       state.categoryValue = action.payload;
     },
+    updatePickUpValue: (state, action) => {
+      state.pickUpValue = action.payload;
+    },
+    updateDropOffValue: (state, action) => {
+      state.dropOffValue = action.payload;
+    },
+    updatePickChecked: (state) => {
+      state.pickChecked = !state.pickChecked;
+    },
+    updateDropChecked: (state) => {
+      state.dropChecked = !state.dropChecked;
+    },
   },
 });
 
@@ -56,6 +85,10 @@ export const {
   changeIsLoading,
   updateCarDetail,
   updateCategoryValue,
+  updatePickUpValue,
+  updateDropOffValue,
+  updatePickChecked,
+  updateDropChecked,
 } = carSlice.actions;
 export default carSlice.reducer;
 
@@ -78,8 +111,6 @@ export const filterByCategory = (filterQuery = ''): AppThunk => {
   return async (dispatch, getState) => {
     const { carReducer } = getState();
     const listCar = await carServices.getSearchCar(carReducer.searchKey);
-    let data = [];
-
     // Group of filter Sport=true&SUV=true&Two=true&price=10
     const queryObject = Object.fromEntries([...new URLSearchParams(filterQuery)]);
     const groupType = Object.keys(TypeCategory).reduce((result, typeItem) => {
@@ -108,37 +139,87 @@ export const filterByCategory = (filterQuery = ''): AppThunk => {
       { price: `${MAX_PRICE}` },
     );
 
-    if (filterQuery) {
-      data = listCar.data.filter((item: carType) => {
-        return (
-          (Object.entries(groupType).length
-            ? Object.entries(groupType).find((listItemQuery) => {
-                return item.type.toLowerCase() === listItemQuery[0].toLowerCase();
-              })
-            : true) &&
-          (Object.entries(groupCapacity).length
-            ? Object.entries(groupCapacity).find((listItemQuery) => {
-                return (
-                  item.capacity.toString().toLowerCase() ===
-                  CapacityCategory[listItemQuery[0] as keyof typeof CapacityCategory]
-                );
-              })
-            : true) &&
-          (Object.entries(groupPrice).length
-            ? Object.entries(groupPrice).find((listItemQuery) => {
-                return (
-                  item.price < parseInt(listItemQuery[1]) ||
-                  item.priceWithoutDisCount < parseInt(listItemQuery[1])
-                );
-              })
-            : true)
-        );
-      });
-    } else {
-      data = [...listCar.data];
-    }
+    const data = listCar.data.filter((item: carType) => {
+      return (
+        (Object.entries(groupType).length
+          ? Object.entries(groupType).find((listItemQuery) => {
+              return item.type.toLowerCase() === listItemQuery[0].toLowerCase();
+            })
+          : true) &&
+        (Object.entries(groupCapacity).length
+          ? Object.entries(groupCapacity).find((listItemQuery) => {
+              return (
+                item.capacity.toString().toLowerCase() ===
+                CapacityCategory[listItemQuery[0] as keyof typeof CapacityCategory]
+              );
+            })
+          : true) &&
+        (Object.entries(groupPrice).length
+          ? Object.entries(groupPrice).find((listItemQuery) => {
+              return (
+                item.price <= parseInt(listItemQuery[1]) ||
+                item.priceWithoutDisCount <= parseInt(listItemQuery[1])
+              );
+            })
+          : true) &&
+        (carReducer.pickUpValue.location?.value
+          ? item.pickLocation.find((locationItem) => {
+              return locationItem.value === carReducer.pickUpValue.location?.value;
+            })
+          : true) &&
+        filterByPickUp(carReducer, item) &&
+        filterByDropOff(carReducer, item)
+      );
+    });
+    console.log('data', data);
     dispatch(updateListCar(data));
   };
+};
+
+const filterByPickUp = (carReducer: carReducerType, car: carType) => {
+  if (carReducer.pickChecked) {
+    (carReducer.pickUpValue.location?.value
+      ? car.pickLocation.find((locationItem) => {
+          return locationItem.value === carReducer.pickUpValue.location?.value;
+        })
+      : true) &&
+      (carReducer.pickUpValue.date
+        ? car.pickDate.find((date) => {
+            return date === carReducer.pickUpValue.date;
+          })
+        : true) &&
+      (carReducer.pickUpValue.time
+        ? car.pickTime.find((time) => {
+            return time === carReducer.pickUpValue.time;
+          })
+        : true);
+  }
+
+  return true;
+};
+
+const filterByDropOff = (carReducer: carReducerType, car: carType) => {
+  if (carReducer.dropChecked) {
+    return (
+      (carReducer.dropOffValue.location?.value
+        ? car.dropLocation.find((location) => {
+            return location.value === carReducer.dropOffValue.location?.value;
+          })
+        : true) &&
+      (carReducer.dropOffValue.date
+        ? car.dropDate.find((date) => {
+            return date === carReducer.dropOffValue.date;
+          })
+        : true) &&
+      (carReducer.dropOffValue.time
+        ? car.dropTime.find((time) => {
+            return time === carReducer.dropOffValue.time;
+          })
+        : true)
+    );
+  }
+
+  return true;
 };
 
 export const getListLocation = (): AppThunk => {

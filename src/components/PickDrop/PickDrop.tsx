@@ -33,39 +33,31 @@ const PickDrop = ({
   handleChangeValue,
   isChecked = false,
   id,
+  value,
   handleChangeCheckBox,
 }: PickDropProps) => {
   const { t } = useTranslation();
-  const [value, setValue] = useState<IPickDropValue>({
-    location: null,
-    date: '',
-    time: '',
-  });
+  const [valuePickDrop, setValuePickDrop] = useState<IPickDropValue>(value);
 
   useEffect(() => {
-    handleChangeValue({
-      ...value,
-      location: value.location,
-      date: value.date,
-      time: value.time,
-    });
-  }, [handleChangeValue, value]);
+    handleChangeValue(valuePickDrop);
+  }, [handleChangeValue, valuePickDrop]);
 
   const handleChangeLocation = (valueLocation: ILocation) => {
-    setValue({
-      ...value,
+    setValuePickDrop({
+      ...valuePickDrop,
       location: valueLocation,
     });
   };
   const handleChangeDate: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setValue({
-      ...value,
+    setValuePickDrop({
+      ...valuePickDrop,
       date: e.target.value,
     });
   };
   const handleChangeTime: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setValue({
-      ...value,
+    setValuePickDrop({
+      ...valuePickDrop,
       time: e.target.value,
     });
   };
@@ -82,13 +74,13 @@ const PickDrop = ({
         <div className="s375:grow s375:border-r s375:basis-0 border-light px-4">
           <h3>{t('common.location')}</h3>
           <Listbox
-            value={value.location}
+            value={valuePickDrop.location}
             onChange={(value: ILocation) => handleChangeLocation(value)}
           >
             <Listbox.Button className="w-full pt-2">
               <div className="flex h-6 items-center justify-between">
                 <span className="text-grey my-1 block truncate text-xs leading-4 tracking-[0.01em]">
-                  {value.location?.value}
+                  {valuePickDrop.location?.value}
                 </span>
                 <span className="text-grey pointer-events-none my-1 flex items-center">
                   <ArrowDown className="fill-current" />
@@ -137,7 +129,7 @@ const PickDrop = ({
           <div className="relative pt-2">
             <div className="flex h-6 justify-between">
               <span className="text-grey my-1 block truncate text-xs leading-4 tracking-[0.01em]">
-                {value.date}
+                {valuePickDrop.date}
               </span>
               <span className="text-grey pointer-events-none my-1 flex items-center">
                 <ArrowDown className="fill-current" />
@@ -145,7 +137,7 @@ const PickDrop = ({
             </div>
             <input
               type="date"
-              value={value.date}
+              value={valuePickDrop.date}
               placeholder="dd-mm-yyyy"
               onChange={handleChangeDate}
               className="datepicker-input absolute left-0 top-0 h-full w-full opacity-0"
@@ -157,7 +149,7 @@ const PickDrop = ({
           <div className="relative pt-2">
             <div className="flex h-6 justify-between">
               <span className="text-grey my-1 block truncate text-xs leading-4 tracking-[0.01em]">
-                {value.time}
+                {valuePickDrop.time}
               </span>
               <span className="text-grey pointer-events-none my-1 flex items-center">
                 <ArrowDown className="fill-current" />
@@ -165,7 +157,7 @@ const PickDrop = ({
             </div>
             <input
               type="time"
-              value={value.time}
+              value={valuePickDrop.time}
               onChange={handleChangeTime}
               className="time-picker absolute left-0 top-0 h-full w-full opacity-0"
             />

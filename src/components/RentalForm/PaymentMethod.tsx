@@ -3,6 +3,7 @@ import PAY_PAL from '@/assets/images/PayPal.png';
 import VISA from '@/assets/images/visa_logo.png';
 import VISA_MC from '@/assets/images/visa_logo_mc.png';
 import { IFormUpdate } from '@/model/interface';
+import { formatCardNumber } from '@/utils/text';
 
 import CheckBox from '../CheckBox/CheckBox';
 import { InputText } from '../InputText/InputText';
@@ -39,7 +40,7 @@ export const PaymentMethod = ({
             value="visa"
             type="radio"
             checked={visa}
-            classLabel="font-semibold text-base leading-5 tracking-tight text-black-2"
+            classLabel="font-semibold text-base leading-5 tracking-tight text-color-bold"
           />
           <div className="flex items-center gap-3">
             <img src={VISA} alt="visa" />
@@ -57,7 +58,7 @@ export const PaymentMethod = ({
                   label="Card Number"
                   classNames="bg-white"
                   register={register}
-                  value={cardNumber}
+                  value={formatCardNumber(cardNumber)}
                   onChange={(e) => {
                     updateFields({ cardNumber: e.target.value });
                   }}
@@ -71,7 +72,7 @@ export const PaymentMethod = ({
                   label="Card Holder"
                   classNames="bg-white"
                   register={register}
-                  value={cardHolder}
+                  value={formatCardNumber(cardHolder)}
                   onChange={(e) => {
                     updateFields({ cardHolder: e.target.value });
                   }}
@@ -120,7 +121,7 @@ export const PaymentMethod = ({
           value="paypal"
           type="radio"
           checked={payPal}
-          classLabel="font-semibold text-sm leading-150 tracking-tight text-black-2"
+          classLabel="font-semibold text-sm leading-150 tracking-tight text-color-bold"
         />
         <img src={PAY_PAL} alt="paypal" />
       </div>
@@ -133,7 +134,7 @@ export const PaymentMethod = ({
           value="bitcoin"
           type="radio"
           checked={bitCoin}
-          classLabel="font-semibold text-sm leading-150 tracking-tight text-black-2"
+          classLabel="font-semibold text-sm leading-150 tracking-tight text-color-bold"
         />
         <img src={BITCOIN} alt="bitcoin" />
       </div>

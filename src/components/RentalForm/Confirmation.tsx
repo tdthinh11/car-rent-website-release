@@ -59,7 +59,7 @@ export const Confirmation = ({ updateFields, onSubmit, errors }: IConfirmationPr
               }}
               name="confirmation"
               checked={confirmItem.isConfirm}
-              classLabel="lg:leading-150 leading-160 text-black-2 ml-2 text-xs font-medium tracking-tight lg:ml-5 lg:text-base lg:font-semibold"
+              classLabel="lg:leading-150 leading-160 text-color-bold ml-2 text-xs font-medium tracking-tight lg:ml-5 lg:text-base lg:font-semibold"
               variant="square"
             />
           </div>
@@ -71,7 +71,7 @@ export const Confirmation = ({ updateFields, onSubmit, errors }: IConfirmationPr
       </Button>
       <img src={SAFETY} alt="safety" className="mt-[34px]" />
       <div className="mt-[14px]">
-        <h3 className="leading-150 text-black-2 font-bold tracking-tight">
+        <h3 className="leading-150 text-color-bold font-bold tracking-tight">
           All your data are safe
         </h3>
         <p className="text-grey mt-1 text-xs font-medium tracking-tight">

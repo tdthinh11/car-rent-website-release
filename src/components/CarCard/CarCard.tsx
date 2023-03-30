@@ -64,7 +64,7 @@ export const CarCard = ({
       >
         <div>
           <div className="flex items-center justify-between">
-            <h1 className="leading-150 text-black-2 mb-1 font-semibold">{carName}</h1>
+            <h1 className="leading-150 text-color-bold mb-1 font-semibold">{carName}</h1>
           </div>
           <p className="leading-150 text-grey text-xs font-medium tracking-tight">{carType}</p>
         </div>
@@ -86,7 +86,7 @@ export const CarCard = ({
           />
         )}
         <div className="mt-7 flex justify-between">
-          <h1 className="text-black-2 font-bold leading-5 tracking-tight">
+          <h1 className="text-color-bold font-bold leading-5 tracking-tight">
             &#36;{price}/<span className="text-grey"> day</span>
           </h1>
         </div>

@@ -38,17 +38,13 @@ const initialPaymentData: IPayment = {
   confirmation: false,
 };
 
-const phoneRegExp = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/;
 const schema = yup.object().shape({
   promoteCode: yup
     .string()
     .required('Promote is required')
     .length(5, 'Promote is not correct, must contain 5 characters'),
   name: yup.string().required('Name is required'),
-  phoneNumber: yup
-    .string()
-    .length(10, 'Phone number is not valid')
-    .matches(phoneRegExp, 'Phone number is not valid'),
+  phoneNumber: yup.string().required('Phone number is required'),
   address: yup.string().required('Address is required'),
   city: yup.string().required('City is required'),
   pickLocation: yup.string().required('Location is required'),
