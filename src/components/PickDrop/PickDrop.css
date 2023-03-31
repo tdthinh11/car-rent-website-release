@@ -1,0 +1,11 @@
+.datepicker-input::-webkit-calendar-picker-indicator,
+.time-picker::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}

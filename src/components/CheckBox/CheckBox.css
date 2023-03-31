@@ -1,0 +1,35 @@
+.checkbox_radio input ~ .checkbox-square {
+  border: 1px solid #90a3bf;
+}
+
+.checkbox_radio input ~ .checkbox-square .square-icon {
+  display: none;
+}
+
+.checkbox_radio input:checked ~ .checkbox-square {
+  border: 1px solid transparent;
+}
+
+.checkbox_radio input:checked ~ .checkbox-square .square-icon {
+  display: block;
+}
+
+.checkbox_radio input ~ .checkbox-circle {
+  background-color: rgba(92, 175, 252, 0.3);
+}
+
+.checkbox_radio input:checked ~ .checkbox-circle {
+  background-color: rgba(53, 99, 233, 0.3);
+}
+
+.checkbox_radio input ~ .checkbox-circle::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #54a6ff;
+}
+
+.checkbox_radio input:checked ~ .checkbox-circle::after {
+  background-color: #3563e9;
+}
