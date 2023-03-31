@@ -162,27 +162,22 @@ export const filterByCategory = (filterQuery = ''): AppThunk => {
               );
             })
           : true) &&
-        (carReducer.pickUpValue.location?.value
-          ? item.pickLocation.find((locationItem) => {
-              return locationItem.value === carReducer.pickUpValue.location?.value;
-            })
-          : true) &&
         filterByPickUp(carReducer, item) &&
         filterByDropOff(carReducer, item)
       );
     });
-    console.log('data', data);
     dispatch(updateListCar(data));
   };
 };
 
 const filterByPickUp = (carReducer: carReducerType, car: carType) => {
   if (carReducer.pickChecked) {
-    (carReducer.pickUpValue.location?.value
-      ? car.pickLocation.find((locationItem) => {
-          return locationItem.value === carReducer.pickUpValue.location?.value;
-        })
-      : true) &&
+    return (
+      (carReducer.pickUpValue.location?.value
+        ? car.pickLocation.find((locationItem) => {
+            return locationItem.value === carReducer.pickUpValue.location?.value;
+          })
+        : true) &&
       (carReducer.pickUpValue.date
         ? car.pickDate.find((date) => {
             return date === carReducer.pickUpValue.date;
@@ -192,7 +187,8 @@ const filterByPickUp = (carReducer: carReducerType, car: carType) => {
         ? car.pickTime.find((time) => {
             return time === carReducer.pickUpValue.time;
           })
-        : true);
+        : true)
+    );
   }
 
   return true;
